@@ -1,0 +1,12 @@
+<form>
+  <input type="text" name="word" value="{{ word }}" />
+  <select name="locale">
+    {% for loc in locales %}
+    <option value="{{ loc }}"
+      {% if loc == locale %}
+        selected="selected"
+      {% endif %}>{{ loc }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">한글라이즈!</button>
+</form>

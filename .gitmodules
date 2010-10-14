@@ -1,0 +1,12 @@
+[submodule "lib/hangulize"]
+	path = lib/hangulize
+	url = git@github.com:sublee/hangulize
+[submodule "lib/jinja2"]
+	path = lib/jinja2
+	url = http://github.com/clones/jinja2.git
+[submodule "lib/werkzeug"]
+	path = lib/werkzeug
+	url = http://github.com/clones/werkzeug.git
+[submodule "lib/flask"]
+	path = lib/flask
+	url = http://github.com/mitsuhiko/flask.git
