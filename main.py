@@ -12,6 +12,10 @@ app = Flask(__name__)
 locales = langs.__all__
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
+
 @app.route('/')
 def index():
     word = request.args.get('word', '')
