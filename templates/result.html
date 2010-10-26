@@ -1,2 +1,22 @@
-{% include "input.html" %}
-<p>{{ hangulized }}</p>
+{% extends "base.html" %}
+
+{% block page_options %}
+  data-theme="e"
+{% endblock %}
+
+{% block header_options %}
+  data-theme="e"
+{% endblock %}
+
+{% block header -%}
+  {% if not request.is_xhr %}
+    <a href="{{ url_for("index") }}" rel="external" data-icon="arrow-l">Back</a>
+  {% endif %}
+  <h1>변환 결과</h1>
+{%- endblock %}
+
+{% block body %}
+  <div id="result">
+    <p>{{ hangulized }}</p>
+  </div>
+{% endblock %}
