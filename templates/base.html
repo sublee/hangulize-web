@@ -4,6 +4,22 @@
 <meta charset="utf-8" />
 <title>Hangulize</title>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+<style type="text/css">
+  @import "http://fontface.kr/NanumGothic/css";
+  .wf-active * {
+    font-family: NanumGothic !important;
+  }
+</style>
+<script src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load( "webfont", "1" );
+  google.setOnLoadCallback(function() {
+    WebFont.load({
+      custom: { families: [ "NanumGothic" ] },
+      urls: [ "http://fontface.kr/NanumGothic/css" ]
+    });
+  });
+</script>
 <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script> 
 <script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
 </head>
