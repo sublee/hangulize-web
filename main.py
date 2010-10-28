@@ -25,12 +25,11 @@ def favicon():
 def index():
     word = request.args.get('word', '')
     locale = request.args.get('locale', 'it')
-    context = dict(word=word, locale=locale, locales=get_locales())
     if word:
-        context['hangulized'] = hangulize(unicode(word), locale=locale)
-        return render_template('result.html', **context)
+        return jsonify(result=hangulize(unicode(word), locale=locale))
     else:
-        return render_template('input.html', **context)
+        context = dict(word=word, locale=locale, locales=get_locales())
+        return render_template('index.html', **context)
 
 
 if __name__ == '__main__':

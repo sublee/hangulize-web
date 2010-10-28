@@ -1,0 +1,87 @@
+body {
+  background: -webkit-gradient(
+    radial, 50% 135, 0, 50% 200, 250, from(#ffe), to(#dedbcc)
+  ) #dedbcc no-repeat;
+  min-height: 550px;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #765;
+}
+
+h1 {
+  margin: 80px auto 0;
+  padding: 0;
+  width: 422px;
+}
+
+form {
+  margin: 0 auto;
+  padding: 0;
+  width: 422px;
+}
+
+label {
+  font-size: 11px;
+}
+
+#word {
+  position: relative;
+  display: block;
+  width: 402px;
+  margin: 0;
+  margin-top: 4px;
+  padding: 9px;
+  border: 1px solid #cba;
+  font-size: 30px;
+  font-family: "Times New Roman", Times, serif;
+  line-height: 30px;
+  color: #765;
+  z-index: 1;
+}
+
+#result {
+  position: relative;
+  margin: 0 auto;
+  margin-top: -47px;
+  width: 422px;
+  font-size: 30px;
+  font-family: serif;
+  line-height: 30px;
+  color: #000;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#result p {
+  margin: 0;
+  border: 1px solid #a98;
+  border-top: none;
+}
+
+#result span {
+  display: block;
+  min-height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 9px;
+}
+
+#result i {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 0;
+  height: 30px;
+  background: #6c0;
+}
+
+#readme {
+  margin: 0 auto;
+  width: 422px;
+  color: #000;
+}
+
+.license {
+  text-align: center;
+  font-size: 11px;
+  font-family: "Times New Roman", Times, serif;
+}
