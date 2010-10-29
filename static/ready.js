@@ -22,6 +22,7 @@ var FOLD = true,
         hangulize.prevWord = word.val();
 
         if ( hangulize.mode === EXPAND ) {
+            // Fold while inputting
             resultWrapper.stop().animate({ marginTop: blindHeight }, delay );
         }
         hangulize.mode = FOLD;
@@ -32,16 +33,17 @@ var FOLD = true,
             return;
         }
         hangulize.timer = setTimeout(function() {
+            var reqWord = word.val();
             word.addClass( "loading" );
             $.get( "", form.serialize(), function( data ) {
-                if ( data.result ) {
+                if ( data.result && reqWord === hangulize.prevWord ) {
                     result.text( data.result );
                     resultWrapper.animate({ marginTop: 0 }, delay );
                     hangulize.mode = EXPAND;
                     word.removeClass( "loading" );
                 }
             }, "json" );
-        }, 250 );
+        }, delay );
     };
 
 // Apply
