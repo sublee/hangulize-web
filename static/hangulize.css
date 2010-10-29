@@ -40,6 +40,10 @@ label {
   z-index: 1;
 }
 
+#word.loading {
+  background: #fff url(load.gif) 390px center no-repeat;
+}
+
 #result {
   position: relative;
   margin: 0 auto;
