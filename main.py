@@ -11,7 +11,7 @@ from hangulize import hangulize
 app = Flask(__name__)
 
 
-def get_locales():
+def get_langs():
     import hangulize.langs
     for loc in hangulize.langs.__all__:
         __import__('hangulize.langs.%s' % loc)
@@ -25,10 +25,15 @@ def favicon():
 def index():
     word = request.args.get('word', '')
     locale = request.args.get('locale', 'it')
-    if word:
-        return jsonify(result=hangulize(unicode(word), locale=locale))
+    context = dict(word=word, locale=locale, langs=get_langs())
+    if word and locale:
+        result = hangulize(unicode(word))
+        if request.is_xhr:
+            return jsonify(result=result, locale=locale)
+        else:
+            context.update(result=result);
+            return render_template('result.html', **context)
     else:
-        context = dict(word=word, locale=locale, locales=get_locales())
         return render_template('index.html', **context)
 
 

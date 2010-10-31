@@ -10,3 +10,6 @@
 [submodule "lib/flask"]
 	path = lib/flask
 	url = http://github.com/mitsuhiko/flask.git
+[submodule "lib/flask-bebel"]
+	path = lib/flask-bebel
+	url = git://github.com/mitsuhiko/flask-babel.git

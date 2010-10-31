@@ -38,7 +38,7 @@
   <!-- Transcriptor -->
   <form>
     <select name="locale">
-      {% for loc, lang in locales %}
+      {% for loc, lang in langs %}
       <option value="{{ loc }}"
         {% if loc == locale %}
           selected="selected"
@@ -50,7 +50,7 @@
       autocomplete="off" />
   </form>
   <div id="result">
-    <p><span></span></p>
+    <p><span>{% block result %}{% endblock %}</span></p>
     <i></i>
   </div>
   <!-- Read Me -->
@@ -71,5 +71,6 @@
       src="{{ "http://s3.amazonaws.com/github/ribbons/"
               "forkme_right_darkblue_121621.png" }}" />
   </a>
+  {% block foot %}{% endblock %}
 </body>
 </html>
