@@ -71,5 +71,26 @@
               "forkme_right_darkblue_121621.png" }}" />
   </a>
   {% block foot %}{% endblock %}
+  <!-- Google Analytics -->
+  <script>
+    var _gaq = _gaq || [];
+    _gaq.push([ "_setAccount", "UA-19439120-1" ]);
+    _gaq.push([ "_trackPageview" ]);
+
+    (function() {
+      var ga = document.createElement( "script" );
+      ga.type = "text/javascript";
+      ga.async = true;
+      ga.src = 
+      if ( "https:" == document.location.protocol ) {
+        ga.src = "https://ssl";
+      } else {
+        ga.src = "http://www";
+      }
+      ga.src += ".google-analytics.com/ga.js";
+      var s = document.getElementsByTagName( "script" )[ 0 ];
+      s.parentNode.insertBefore( ga, s );
+    })();
+  </script>
 </body>
 </html>
