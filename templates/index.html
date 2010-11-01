@@ -42,10 +42,10 @@
       <option value="{{ loc }}"
         {% if loc == locale %}
           selected="selected"
-        {% endif %}>{{ lang.__name__ }}</option>
+        {% endif %}>{{ lang }}</option>
       {% endfor %}
     </select>
-    <label for="word">단어:</label>
+    <label for="word">{{ _("Word:") }}</label>
     <input type="text" name="word" id="word" value="{{ word }}"
       autocomplete="off" />
   </form>
@@ -55,14 +55,13 @@
   </div>
   <!-- Read Me -->
   <div id="readme">
-    <p>Hangulize는 자동으로 외래어를 한글로 변환해주는 프로그램입니다. 바로 이
-       페이지에서 작동시킬 수 있습니다. 위 입력창에 외래어 단어를 입력해보세요.
-       선택한 언어의 외래어 표기 규칙에 따라 변환된 한글 표기를 볼 수
-       있습니다.</p>
+    <p>{{ _("__README__") }}</p>
   </div>
   <!-- License -->
   <div class="license">
-    &copy; 2010 Hangulize team. All rights reserved.
+    &copy; 2010
+    <a href="http://groups.google.com/group/hangulize">Hangulize team</a>.
+    All rights reserved.
   </div>
   <!-- GitHub Ribbon -->
   <a href="http://github.com/sublee/hangulize">

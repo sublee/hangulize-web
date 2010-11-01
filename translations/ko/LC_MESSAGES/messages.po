@@ -1,0 +1,72 @@
+# Korean translations for .
+# Copyright (C) 2010 Hangulize team
+# This file is distributed under the same license as the  project.
+# Heungsub Lee <heung@sublee.kr>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  hangulize-web\n"
+"Report-Msgid-Bugs-To: hangulize@googlegroups.com\n"
+"POT-Creation-Date: 2010-11-01 17:38+0900\n"
+"PO-Revision-Date: 2010-11-01 17:58+0900\n"
+"Last-Translator: Heungsub Lee <heung@sublee.kr>\n"
+"Language-Team: Hangulize Team <hangulize@googlegroups.com>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.5\n"
+
+#: main.py:33
+msgid "Japanese"
+msgstr "일본어"
+
+msgid "German"
+msgstr "독일어"
+
+msgid "Portuguese"
+msgstr "포르투갈어"
+
+msgid "Swedish"
+msgstr "스웨덴어"
+
+msgid "Vietnamese"
+msgstr "베트남어"
+
+msgid "Dutch"
+msgstr "독일어"
+
+msgid "SerboCroatian"
+msgstr "세르보크로아트어"
+
+msgid "Hungarian"
+msgstr "헝가리어"
+
+msgid "BrazilianPortuguese"
+msgstr "브라질 포르투갈어"
+
+msgid "Italian"
+msgstr "이탈리아어"
+
+msgid "Polish"
+msgstr "폴란드어"
+
+msgid "Czech"
+msgstr "체코어"
+
+msgid "Spanish"
+msgstr "스페인어"
+
+msgid "Romanian"
+msgstr "루마니아어"
+
+#: templates/index.html:48
+msgid "Word:"
+msgstr "단어:"
+
+#: templates/index.html:58
+msgid "__README__"
+msgstr ""
+"Hangulize는 자동으로 외래어를 한글로 변환해주는 프로그램입니다. 바로 이 페이지에서 작동시킬 수 있습니다. 위 입력창에 "
+"외래어 단어를 입력해보세요. 선택한 언어의 외래어 표기 규칙에 따라 변환된 한글 표기를 볼 수 있습니다."
+

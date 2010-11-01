@@ -1,0 +1,74 @@
+# English translations for .
+# Copyright (C) 2010 Hangulize team
+# This file is distributed under the same license as the  project.
+# Heungsub Lee <heung@sublee.kr>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  hangulize-web\n"
+"Report-Msgid-Bugs-To: hangulize@googlegroups.com\n"
+"POT-Creation-Date: 2010-11-01 17:38+0900\n"
+"PO-Revision-Date: 2010-11-01 17:58+0900\n"
+"Last-Translator: Heungsub Lee <heung@sublee.kr>\n"
+"Language-Team: Hangulize Team <hangulize@googlegroups.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.5\n"
+
+#: main.py:33
+msgid "Japanese"
+msgstr "Japanese"
+
+msgid "German"
+msgstr "German"
+
+msgid "Portuguese"
+msgstr "Portuguese"
+
+msgid "Swedish"
+msgstr "Swedish"
+
+msgid "Vietnamese"
+msgstr "Vietnamese"
+
+msgid "Dutch"
+msgstr "Dutch"
+
+msgid "SerboCroatian"
+msgstr "Serbo-Croatian"
+
+msgid "Hungarian"
+msgstr "Hungarian"
+
+msgid "BrazilianPortuguese"
+msgstr "Brazilian Portuguese"
+
+msgid "Italian"
+msgstr "Italian"
+
+msgid "Polish"
+msgstr "Polish"
+
+msgid "Czech"
+msgstr "Czech"
+
+msgid "Spanish"
+msgstr "Spanish"
+
+msgid "Romanian"
+msgstr "Romanian"
+
+#: templates/index.html:48
+msgid "Word:"
+msgstr "Word:"
+
+#: templates/index.html:58
+msgid "__README__"
+msgstr ""
+"Hangulize is the application which transcribe a loanword to Hangul(the "
+"Korean alphabet automatically. You could run this application on the this"
+" page. Input a loan word to the input box. With the selected orthography,"
+" you may get a hangul word."
+
