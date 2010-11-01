@@ -52,7 +52,7 @@ label {
   font-size: 30px;
   font-family: serif;
   line-height: 30px;
-  color: #000;
+  color: #333;
   background: rgba(255, 255, 255, 0.2);
 }
 
@@ -81,11 +81,20 @@ label {
 #readme {
   margin: 0 auto;
   width: 422px;
-  color: #000;
+  color: #333;
 }
 
 .license {
   text-align: center;
   font-size: 11px;
   font-family: "Times New Roman", Times, serif;
+}
+
+.license a:link, .license a:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+.license a:hover {
+  text-decoration: underline;
 }
