@@ -34,7 +34,7 @@ msgid "Vietnamese"
 msgstr "베트남어"
 
 msgid "Dutch"
-msgstr "독일어"
+msgstr "네덜란드어"
 
 msgid "SerboCroatian"
 msgstr "세르보크로아트어"
