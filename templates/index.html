@@ -81,12 +81,14 @@
       var ga = document.createElement( "script" );
       ga.type = "text/javascript";
       ga.async = true;
-      if ( "https:" == document.location.protocol ) {
-        ga.src = "https://ssl";
+      var src;
+      if ( "https:" === document.location.protocol ) {
+        src = "https://ssl";
       } else {
-        ga.src = "http://www";
+        src = "http://www";
       }
-      ga.src += ".google-analytics.com/ga.js";
+      src += ".google-analytics.com/ga.js";
+      ga.src = src;
       var s = document.getElementsByTagName( "script" )[ 0 ];
       s.parentNode.insertBefore( ga, s );
     })();
