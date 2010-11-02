@@ -6,8 +6,6 @@
 <link rel="stylesheet" type="text/css"
   href="{{ url_for("static", filename="hangulize.css") }}" />
 <style type="text/css">
-  @import "http://fontface.kr/NanumGothic/css";
-  @import "http://fontface.kr/NanumMyeongjo/css";
   .wf-active body {
     font-family: NanumGothic;
   }
@@ -20,11 +18,13 @@
   google.load( "webfont", "1" );
   google.setOnLoadCallback(function() {
     WebFont.load({
-      custom: { families: [ "NanumGothic", "NanumMyeongjo" ] },
-      urls: [
-        "http://fontface.kr/NanumGothic/css",
-        "http://fontface.kr/NanumMyeongjo/css"
-      ]
+      custom: {
+        families: [ "NanumGothic", "NanumMyeongjo" ],
+        urls: [
+          "http://fontface.kr/NanumGothic/css",
+          "http://fontface.kr/NanumMyeongjo/css"
+        ]
+      }
     });
   });
 </script>
