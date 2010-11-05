@@ -67,8 +67,7 @@ msgstr "Word:"
 #: templates/index.html:58
 msgid "__README__"
 msgstr ""
-"Hangulize is the application which transcribe a loanword to Hangul(the "
-"Korean alphabet automatically. You could run this application on the this"
-" page. Input a loan word to the input box. With the selected orthography,"
-" you may get a hangul word."
-
+"'Hangulize' is an application which automatically transcribes a non-Korean "
+"word into hangul, the Korean alphabet. Select the original language from the "
+"list and enter the word you want to transcribe into hangul in the box above. "
+"The hangul transcription will be displayed."
