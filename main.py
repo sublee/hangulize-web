@@ -47,7 +47,7 @@ def index():
     locale = request.args.get('locale', 'it')
     context = dict(word=word, locale=locale, langs=get_langs())
     if word and locale:
-        result = hangulize(unicode(word))
+        result = hangulize(unicode(word), locale)
         if request.is_xhr:
             return jsonify(result=result, locale=locale)
         else:
