@@ -4,6 +4,8 @@ libpath = os.path.abspath('lib')
 for dirname in os.listdir(libpath):
     sys.path.insert(0, os.path.join(libpath, dirname))
 sys.path.insert(0, libpath)
+import re
+import random
 from google.appengine.ext.webapp.util import run_wsgi_app
 from flask import *
 from flaskext.babel import Babel, gettext
@@ -55,6 +57,19 @@ def index():
             return render_template('result.html', **context)
     else:
         return render_template('index.html', **context)
+
+
+@app.route('/shuffle.js')
+def shuffle():
+    locale = random.choice(list(get_langs()))[0]
+    test_path = os.path.join(libpath, 'hangulize', 'tests', locale + '.py')
+    assertion_pattern = re.compile("assert u'(?P<want>.+)' == " \
+                                   "self\.hangulize\(u'(?P<word>.+)'\)")
+    with open(test_path) as f:
+        test_code = ''.join(f.readlines())
+        assertion = random.choice(list(assertion_pattern.finditer(test_code)))
+    context = dict(locale=locale, word=assertion.group('word'))
+    return render_template('shuffle.js', **context)
 
 
 if __name__ == '__main__':

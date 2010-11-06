@@ -70,7 +70,9 @@
       src="{{ "http://s3.amazonaws.com/github/ribbons/"
               "forkme_right_darkblue_121621.png" }}" />
   </a>
-  {% block foot %}{% endblock %}
+  {% block foot %}
+    <script src="{{ url_for("shuffle") }}"></script>
+  {% endblock %}
   <!-- Google Analytics -->
   <script>
     var _gaq = _gaq || [];
