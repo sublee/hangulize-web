@@ -79,12 +79,26 @@ label {
 }
 
 #readme {
-  margin: 0 auto;
+  margin: 20px auto 8px;
   width: 422px;
   color: #333;
 }
 
+#readme p {
+  margin: 0;
+  padding: 0;
+}
+
+.share {
+  text-align: center;
+}
+
 .license {
+  margin: 0 auto;
+  width: 422px;
+  border-top: 1px solid #cba;
+  margin-top: 5px;
+  padding-top: 9px;
   text-align: center;
   font-size: 11px;
   font-family: "Times New Roman", Times, serif;
