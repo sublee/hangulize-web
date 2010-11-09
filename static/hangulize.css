@@ -2,6 +2,9 @@ body {
   background: -webkit-gradient(
     radial, 50% 135, 0, 50% 200, 250, from(#ffe), to(#dedbcc)
   ) #dedbcc no-repeat;
+  background: -moz-radial-gradient(
+    50% 135px 45deg, circle closest-side, #ffe 0, #dedbcc 200px
+  ) #dedbcc no-repeat;
   min-height: 550px;
   margin: 0;
   padding: 0;
