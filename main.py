@@ -23,7 +23,9 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    """Returns the HTTP accepted language."""
+    """Returns a best matched language. It finds a language from the GET
+    arguments, the cookie values, and the HTTP ``Accept-Language`` header.
+    """
     try:
         return request.args["locale"]
     except KeyError:
@@ -36,6 +38,7 @@ def get_locale():
 
 @app.route("/locale", methods=["post"])
 def set_locale():
+    """Sets a language to the cookie values."""
     locale = request.form["locale"]
     response = redirect(url_for("index"))
     response.set_cookie("locale", locale, 60 * 60 * 24 * 14)
@@ -80,6 +83,9 @@ def index():
 
 @app.route('/shuffle.js')
 def shuffle():
+    """Sends a JavaScript code which fills a random language and word to the
+    form of the index page.
+    """
     lang = random.choice(list(all_langs()))[0]
     test_path = os.path.join(libpath, 'hangulize', 'tests', lang + '.py')
     assertion_pattern = re.compile("assert u'(?P<want>.+)' == " \
