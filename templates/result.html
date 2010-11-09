@@ -6,5 +6,9 @@
 $(function() {
   $( "#result" ).css( "margin-top", 0 );
 });
+{% if not success %}
+  alert({{ reason|tojson|safe }});
+  history.back();
+{% endif %}
 </script>
 {% endblock %}

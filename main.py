@@ -10,7 +10,7 @@ import random
 from google.appengine.ext.webapp.util import run_wsgi_app
 from flask import *
 from flaskext.babel import Babel, gettext
-from hangulize import hangulize
+from hangulize import hangulize, LanguageError
 
 
 LOCALES = ['ko', 'en']
@@ -64,18 +64,21 @@ def favicon():
 @app.route('/')
 def index():
     """The index page."""
-    mimetypes = ['text/html', 'application/json']
-    mimetype = request.accept_mimetypes.best_match(mimetypes)
     word = request.args.get('word', '')
     lang = request.args.get('lang', 'it')
     context = dict(word=word, lang=lang, langs=all_langs(),
                    locale=get_locale())
     if word and lang:
-        result = hangulize(unicode(word), lang)
-        if mimetype == mimetypes[1]:
-            return jsonify(result=result, lang=lang)
+        def get_context(word, lang):
+            try:
+                result = hangulize(unicode(word), lang)
+                return dict(success=True, result=result)
+            except LanguageError as e:
+                return dict(success=False, reason=str(e))
+        if request.is_xhr:
+            return jsonify(**get_context(word, lang))
         else:
-            context.update(result=result);
+            context.update(**get_context(word, lang));
             return render_template('result.html', **context)
     else:
         return render_template('index.html', **context)
