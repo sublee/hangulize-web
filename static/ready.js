@@ -2,7 +2,7 @@ $(function() {
 
 // Elements
 var word = $( "#word" ),
-    locale = $( "[name=locale]" ),
+    lang = $( "[name=lang]" ),
     form = word.parent(),
     resultWrapper = $( "#result" ),
     result = resultWrapper.find( "span:eq(0)" );
@@ -48,7 +48,7 @@ var FOLD = true,
 
 // Apply
 word.keypress( hangulize ).keyup( hangulize ).keydown( hangulize );
-locale.change(function() {
+lang.change(function() {
     delete hangulize.prevWord;
     hangulize.call( this );
 });

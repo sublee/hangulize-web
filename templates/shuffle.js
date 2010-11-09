@@ -1,4 +1,4 @@
 $(function() {
-    $( "[name=locale]" ).val({{ locale|tojson|safe }});
+    $( "[name=lang]" ).val({{ lang|tojson|safe }});
     $( "#word" ).val({{ word|tojson|safe }}).keypress();
 });

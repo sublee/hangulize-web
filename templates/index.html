@@ -38,7 +38,7 @@
   </h1>
   <!-- Transcriptor -->
   <form>
-    <select name="locale">
+    <select name="lang">
       {% for loc, lang in langs %}
       <option value="{{ loc }}"
         {% if loc == locale %}
@@ -62,6 +62,24 @@
   <div class="share">
     {% include "fblike.html" %}
   </div>
+  <!-- Set Locale -->
+  <form method="post" action="{{ url_for("set_locale") }}" class="set-locale">
+    <input type="hidden" name="locale" value="{{ locale }}" />
+    {% if locale == "ko" %}
+      <em>한국어</em> | <a href="" data-locale="en">English</a>
+    {% else %}
+      <a href="" data-locale="ko">한국어</a> | <em>English</em>
+    {% endif %}
+    <script>
+      $( ".set-locale a" ).click(function() {
+        var self = $( this );
+        var form = self.parent();
+        form.find( "[name=locale]" ).val( self.data( "locale" ) );
+        form.submit();
+        return false;
+      });
+    </script>
+  </form>
   <!-- License -->
   <div class="license">
     &copy; 2010

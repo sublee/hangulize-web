@@ -24,10 +24,25 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale():
     """Returns the HTTP accepted language."""
-    return request.accept_languages.best_match(LOCALES)
+    try:
+        return request.args["locale"]
+    except KeyError:
+        pass
+    try:
+        return request.cookies["locale"]
+    except KeyError:
+        return request.accept_languages.best_match(LOCALES)
 
 
-def get_langs():
+@app.route("/locale", methods=["post"])
+def set_locale():
+    locale = request.form["locale"]
+    response = redirect(url_for("index"))
+    response.set_cookie("locale", locale, 60 * 60 * 24 * 14)
+    return response
+
+
+def all_langs():
     """Returns the allowed languages in :mod:`hangulize`."""
     import hangulize.langs
     for loc in hangulize.langs.__all__:
@@ -47,12 +62,13 @@ def favicon():
 def index():
     """The index page."""
     word = request.args.get('word', '')
-    locale = request.args.get('locale', 'it')
-    context = dict(word=word, locale=locale, langs=get_langs())
-    if word and locale:
-        result = hangulize(unicode(word), locale)
+    lang = request.args.get('lang', 'it')
+    context = dict(word=word, lang=lang, langs=all_langs(),
+                   locale=get_locale())
+    if word and lang:
+        result = hangulize(unicode(word), lang)
         if request.is_xhr:
-            return jsonify(result=result, locale=locale)
+            return jsonify(result=result, lang=lang)
         else:
             context.update(result=result);
             return render_template('result.html', **context)
@@ -62,14 +78,14 @@ def index():
 
 @app.route('/shuffle.js')
 def shuffle():
-    locale = random.choice(list(get_langs()))[0]
-    test_path = os.path.join(libpath, 'hangulize', 'tests', locale + '.py')
+    lang = random.choice(list(all_langs()))[0]
+    test_path = os.path.join(libpath, 'hangulize', 'tests', lang + '.py')
     assertion_pattern = re.compile("assert u'(?P<want>.+)' == " \
                                    "self\.hangulize\(u'(?P<word>.+)'\)")
     with open(test_path) as f:
         test_code = ''.join(f.readlines())
         assertion = random.choice(list(assertion_pattern.finditer(test_code)))
-    context = dict(locale=locale, word=assertion.group('word'))
+    context = dict(lang=lang, word=assertion.group('word'))
     return render_template('shuffle.js', **context)
 
 
