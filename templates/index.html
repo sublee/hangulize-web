@@ -39,11 +39,11 @@
   <!-- Transcriptor -->
   <form>
     <select name="lang">
-      {% for loc, lang in langs %}
-      <option value="{{ loc }}"
-        {% if loc == locale %}
+      {% for l, label in langs %}
+      <option value="{{ l }}"
+        {% if l == lang %}
           selected="selected"
-        {% endif %}>{{ lang }}</option>
+        {% endif %}>{{ label }}</option>
       {% endfor %}
     </select>
     <label for="word">{{ _("Word:") }}</label>
