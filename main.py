@@ -61,13 +61,15 @@ def favicon():
 @app.route('/')
 def index():
     """The index page."""
+    mimetypes = ['text/html', 'application/json']
+    mimetype = request.accept_mimetypes.best_match(mimetypes)
     word = request.args.get('word', '')
     lang = request.args.get('lang', 'it')
     context = dict(word=word, lang=lang, langs=all_langs(),
                    locale=get_locale())
     if word and lang:
         result = hangulize(unicode(word), lang)
-        if request.is_xhr:
+        if mimetype == mimetypes[1]:
             return jsonify(result=result, lang=lang)
         else:
             context.update(result=result);
