@@ -60,6 +60,9 @@ msgstr "Spanish"
 msgid "Romanian"
 msgstr "Romanian"
 
+msgid "Russian"
+msgstr "Russian"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "Word:"

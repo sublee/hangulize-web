@@ -60,6 +60,9 @@ msgstr "스페인어"
 msgid "Romanian"
 msgstr "루마니아어"
 
+msgid "Russian"
+msgstr "러시아어"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "단어:"
