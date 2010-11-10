@@ -73,7 +73,7 @@ def index():
             try:
                 result = hangulize(unicode(word), lang)
                 return dict(success=True, result=result)
-            except LanguageError as e:
+            except LanguageError, e:
                 return dict(success=False, reason=str(e))
         if request.is_xhr:
             return jsonify(**get_context(word, lang))
