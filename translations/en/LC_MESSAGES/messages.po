@@ -18,50 +18,14 @@ msgstr ""
 "Generated-By: Babel 0.9.5\n"
 
 #: main.py:33
-msgid "Japanese"
-msgstr "Japanese"
-
-msgid "German"
-msgstr "German"
-
-msgid "Portuguese"
-msgstr "Portuguese"
-
-msgid "Swedish"
-msgstr "Swedish"
-
-msgid "Vietnamese"
-msgstr "Vietnamese"
-
-msgid "Dutch"
-msgstr "Dutch"
-
 msgid "SerboCroatian"
 msgstr "Serbo-Croatian"
-
-msgid "Hungarian"
-msgstr "Hungarian"
 
 msgid "BrazilianPortuguese"
 msgstr "Brazilian Portuguese"
 
-msgid "Italian"
-msgstr "Italian"
-
-msgid "Polish"
-msgstr "Polish"
-
-msgid "Czech"
-msgstr "Czech"
-
-msgid "Spanish"
-msgstr "Spanish"
-
-msgid "Romanian"
-msgstr "Romanian"
-
-msgid "Russian"
-msgstr "Russian"
+msgid "MiddleWelsh"
+msgstr "Middle Welsh"
 
 #: templates/index.html:48
 msgid "Word:"

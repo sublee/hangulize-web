@@ -63,6 +63,12 @@ msgstr "루마니아어"
 msgid "Russian"
 msgstr "러시아어"
 
+msgid "Welsh"
+msgstr "웨일스어"
+
+msgid "MiddleWelsh"
+msgstr "중세 웨일스어"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "단어:"
