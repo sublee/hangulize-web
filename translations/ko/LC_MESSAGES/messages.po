@@ -72,6 +72,12 @@ msgstr "중세 웨일스어"
 msgid "Bulgarian"
 msgstr "불가리아어"
 
+msgid "AncientGreek"
+msgstr "고대 그리스어"
+
+msgid "ModernGreek"
+msgstr "현대 그리스어"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "단어:"

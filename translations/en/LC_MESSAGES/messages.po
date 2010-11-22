@@ -27,6 +27,12 @@ msgstr "Brazilian Portuguese"
 msgid "MiddleWelsh"
 msgstr "Middle Welsh"
 
+msgid "AncientGreek"
+msgstr "Ancient Greek"
+
+msgid "ModernGreek"
+msgstr "Modern Greek"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "Word:"
