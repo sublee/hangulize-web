@@ -33,6 +33,12 @@ msgstr "Ancient Greek"
 msgid "ModernGreek"
 msgstr "Modern Greek"
 
+msgid "Georgian1"
+msgstr "Georgian 1st scheme"
+
+msgid "Georgian2"
+msgstr "Georgian 2nd scheme"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "Word:"

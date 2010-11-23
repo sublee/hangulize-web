@@ -78,6 +78,12 @@ msgstr "고대 그리스어"
 msgid "ModernGreek"
 msgstr "현대 그리스어"
 
+msgid "Georgian1"
+msgstr "조지아어 제1안"
+
+msgid "Georgian2"
+msgstr "조지아어 제2안"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "단어:"
