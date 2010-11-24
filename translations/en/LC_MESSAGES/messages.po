@@ -34,10 +34,10 @@ msgid "ModernGreek"
 msgstr "Modern Greek"
 
 msgid "Georgian1"
-msgstr "Georgian 1st scheme"
+msgstr "Georgian(broad transcription)"
 
 msgid "Georgian2"
-msgstr "Georgian 2nd scheme"
+msgstr "Georgian(narrow transcription)"
 
 #: templates/index.html:48
 msgid "Word:"

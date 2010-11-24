@@ -79,10 +79,10 @@ msgid "ModernGreek"
 msgstr "현대 그리스어"
 
 msgid "Georgian1"
-msgstr "조지아어 제1안"
+msgstr "조지아어(간략 전사)"
 
 msgid "Georgian2"
-msgstr "조지아어 제2안"
+msgstr "조지아어(정밀 전사)"
 
 #: templates/index.html:48
 msgid "Word:"
