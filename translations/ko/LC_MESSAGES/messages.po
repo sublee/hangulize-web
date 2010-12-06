@@ -84,6 +84,24 @@ msgstr "조지아어(간략 전사)"
 msgid "Georgian2"
 msgstr "조지아어(정밀 전사)"
 
+msgid "Latin"
+msgstr "라틴어"
+
+msgid "Estonian"
+msgstr "에스토니아어"
+
+msgid "Finnish"
+msgstr "핀란드어"
+
+msgid "Icelandic"
+msgstr "아이슬란드어"
+
+msgid "Lithuanian"
+msgstr "리투아니아어"
+
+msgid "Latvian"
+msgstr "라트비아어"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "단어:"
