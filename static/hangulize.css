@@ -14,20 +14,33 @@ body {
   color: #765;
 }
 
-h1 {
-  margin: 80px auto 0;
-  padding: 0;
-  width: 422px;
-}
-
-form {
+h1, form, .shuffle, #result, #readme, .set-locale {
   margin: 0 auto;
   padding: 0;
   width: 422px;
 }
 
+h1 {
+  margin-top: 80px;
+}
+
 label {
   font-size: 11px;
+}
+
+.shuffle {
+  text-align: right;
+}
+
+.shuffle a {
+  font-size: 11px;
+  line-height: 20px;
+  color: #ba9;
+  text-decoration: none;
+}
+
+.shuffle a:hover {
+  color: #765;
 }
 
 #word {
@@ -51,9 +64,7 @@ label {
 
 #result {
   position: relative;
-  margin: 0 auto;
   margin-top: -47px;
-  width: 422px;
   font-size: 30px;
   font-family: serif;
   line-height: 30px;
@@ -84,8 +95,8 @@ label {
 }
 
 #readme {
-  margin: 20px auto 8px;
-  width: 422px;
+  margin-top: 5px;
+  margin-bottom: 8px;
   color: #333;
 }
 
@@ -99,9 +110,7 @@ label {
 }
 
 .set-locale {
-  width: 422px;
   border-top: 1px solid #cba;
-  margin: 0 auto;
   padding-top: 9px;
   text-align: center;
   font-size: 11px;

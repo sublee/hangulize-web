@@ -54,6 +54,9 @@
     <p><span>{% block result %}{% endblock %}</span></p>
     <i></i>
   </div>
+  <div class="shuffle">
+    <a href="">{{ _("Fill with a random example") }}</a>
+  </div>
   <!-- Read Me -->
   <div id="readme">
     <p>{{ _("__README__") }}</p>
@@ -94,7 +97,7 @@
               "forkme_right_darkblue_121621.png" }}" />
   </a>
   {% block foot %}
-    <script src="{{ url_for("shuffle") }}"></script>
+    <script class="shuffle" src="{{ url_for("shuffle") }}"></script>
   {% endblock %}
   <!-- Google Analytics -->
   <script>

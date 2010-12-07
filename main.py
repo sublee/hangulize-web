@@ -89,7 +89,7 @@ def shuffle():
     """Sends a JavaScript code which fills a random language and word to the
     form of the index page.
     """
-    lang = random.choice(list(all_langs()))[0]
+    lang = request.args.get('lang') or random.choice(list(all_langs()))[0]
     test_path = os.path.join(libpath, 'hangulize', 'tests', lang + '.py')
     assertion_pattern = re.compile("assert u'(?P<want>.+)' == " \
                                    "self\.hangulize\(u'(?P<word>.+)'\)")

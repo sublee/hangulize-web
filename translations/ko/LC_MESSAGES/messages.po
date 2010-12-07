@@ -106,6 +106,9 @@ msgstr "라트비아어"
 msgid "Word:"
 msgstr "단어:"
 
+msgid "Fill with a random example"
+msgstr "다른 예제 보기"
+
 #: templates/index.html:58
 msgid "__README__"
 msgstr ""

@@ -44,6 +44,11 @@ var FOLD = true,
                 }
             }, "json" );
         }, delay );
+    },
+    shuffle = function() {
+        var script = $( "script.shuffle:eq(0)" ).clone();
+        script.attr( "src", script.attr( "src" ) + "?lang=" + lang.val() );
+        script.appendTo( document.body );
     };
 
 // Apply
@@ -51,6 +56,10 @@ word.keypress( hangulize ).keyup( hangulize ).keydown( hangulize );
 lang.change(function() {
     delete hangulize.prevWord;
     hangulize.call( this );
+});
+$( ".shuffle a" ).click(function() {
+    shuffle();
+    return false;
 });
 
 // Default Focus
