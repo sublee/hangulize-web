@@ -36,7 +36,7 @@ var FOLD = true,
             var reqWord = word.val();
             word.addClass( "loading" );
             $.get( "", form.serialize(), function( data ) {
-                if ( data.result && reqWord === hangulize.prevWord ) {
+                if ( data.success && reqWord === hangulize.prevWord ) {
                     result.text( data.result );
                     resultWrapper.animate({ marginTop: 0 }, delay );
                     hangulize.mode = EXPAND;
@@ -46,8 +46,8 @@ var FOLD = true,
         }, delay );
     },
     shuffle = function() {
-        var script = $( "script.shuffle:eq(0)" ).clone();
-        script.attr( "src", script.attr( "src" ) + "?lang=" + lang.val() );
+        var script = $( "<script></script>" );
+        script.attr( "src", "/shuffle.js?lang=" + lang.val() );
         script.appendTo( document.body );
     };
 
