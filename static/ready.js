@@ -41,6 +41,13 @@ var FOLD = true,
                     resultWrapper.animate({ marginTop: 0 }, delay );
                     hangulize.mode = EXPAND;
                     word.removeClass( "loading" );
+                    if ( history.replaceState ) {
+                        var enc = encodeURIComponent,
+                            qs = "?";
+                        qs += "lang=" + enc( lang.val() );
+                        qs += "&word=" + enc( word.val() );
+                        history.replaceState( null, "", qs );
+                    }
                 }
             }, "json" );
         }, delay );

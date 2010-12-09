@@ -45,14 +45,15 @@ def set_locale():
     return response
 
 
-def all_langs():
+def get_langs():
     """Returns the allowed languages in :mod:`hangulize`."""
     import hangulize.langs
-    for loc in hangulize.langs.__all__:
-        __import__('hangulize.langs.%s' % loc)
-        lang = getattr(getattr(hangulize.langs, loc), loc)
-        lang_name = gettext(lang.__name__)
-        yield (loc, lang_name)
+    def iter():
+        for code in hangulize.langs.get_list():
+            yield code, gettext(code)
+    def compare(x, y):
+        return cmp(x[1], y[1])
+    return sorted(iter(), cmp=compare)
 
 
 @app.route('/favicon.ico')
@@ -66,8 +67,8 @@ def index():
     """The index page."""
     word = request.args.get('word', '')
     lang = request.args.get('lang', 'it')
-    context = dict(word=word, lang=lang, langs=all_langs(),
-                   locale=get_locale())
+    context = dict(word=word, lang=lang,
+                   langs=get_langs(), locale=get_locale())
     if word and lang:
         def get_context(word, lang):
             try:
@@ -89,8 +90,9 @@ def shuffle():
     """Sends a JavaScript code which fills a random language and word to the
     form of the index page.
     """
-    lang = request.args.get('lang') or random.choice(list(all_langs()))[0]
-    test_path = os.path.join(libpath, 'hangulize', 'tests', lang + '.py')
+    lang = request.args.get('lang') or random.choice(list(get_langs()))[0]
+    test_path = os.path.join(libpath, 'hangulize', 'tests',
+                             lang.replace('.', '_') + '.py')
     assertion_pattern = re.compile("assert u'(?P<want>.+)' == " \
                                    "self\.hangulize\(u'(?P<word>.+)'\)")
     with open(test_path) as f:

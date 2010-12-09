@@ -18,26 +18,101 @@ msgstr ""
 "Generated-By: Babel 0.9.5\n"
 
 #: main.py:33
-msgid "SerboCroatian"
+msgid "lat"
+msgstr "Latin"
+
+msgid "deu"
+msgstr "German"
+
+msgid "rus"
+msgstr "Russian"
+
+msgid "ell"
+msgstr "Greek"
+
+msgid "grc"
+msgstr "Greek (Ancient)"
+
+msgid "ita"
+msgstr "Italian"
+
+msgid "spa"
+msgstr "Spanish"
+
+msgid "jpn"
+msgstr "Japanese"
+
+msgid "pol"
+msgstr "Polish"
+
+msgid "ces"
+msgstr "Czech"
+
+msgid "hbs"
 msgstr "Serbo-Croatian"
 
-msgid "BrazilianPortuguese"
-msgstr "Brazilian Portuguese"
+msgid "ron"
+msgstr "Romanian"
 
-msgid "MiddleWelsh"
-msgstr "Middle Welsh"
+msgid "hun"
+msgstr "Hungarian"
 
-msgid "AncientGreek"
-msgstr "Ancient Greek"
+msgid "vie"
+msgstr "Vietnamese"
 
-msgid "ModernGreek"
-msgstr "Modern Greek"
+msgid "swe"
+msgstr "Swedish"
 
-msgid "Georgian1"
-msgstr "Georgian (broad transcription)"
+msgid "nld"
+msgstr "Dutch"
 
-msgid "Georgian2"
-msgstr "Georgian (narrow transcription)"
+msgid "por"
+msgstr "Portuguese"
+
+msgid "por.br"
+msgstr "Portuguese (Brazil)"
+
+msgid "cym"
+msgstr "Welsh"
+
+msgid "wlm"
+msgstr "Welsh (Middle)"
+
+msgid "bul"
+msgstr "Bulgarian"
+
+msgid "kat"
+msgstr "Georgian"
+
+msgid "kat.narrow"
+msgstr "Georgian (Narrow)"
+
+msgid "fin"
+msgstr "Finnish"
+
+msgid "est"
+msgstr "Estonian"
+
+msgid "lav"
+msgstr "Latvian"
+
+msgid "lit"
+msgstr "Lithuanian"
+
+msgid "isl"
+msgstr "Icelandic"
+
+msgid "cat"
+msgstr "Catalan"
+
+msgid "slk"
+msgstr "Slovak"
+
+msgid "slv"
+msgstr "Slovenian"
+
+msgid "sqi"
+msgstr "Albanian"
 
 #: templates/index.html:48
 msgid "Word:"

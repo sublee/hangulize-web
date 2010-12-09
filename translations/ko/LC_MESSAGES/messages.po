@@ -17,90 +17,102 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.5\n"
 
-#: main.py:33
-msgid "Japanese"
-msgstr "일본어"
-
-msgid "German"
-msgstr "독일어"
-
-msgid "Portuguese"
-msgstr "포르투갈어"
-
-msgid "Swedish"
-msgstr "스웨덴어"
-
-msgid "Vietnamese"
-msgstr "베트남어"
-
-msgid "Dutch"
-msgstr "네덜란드어"
-
-msgid "SerboCroatian"
-msgstr "세르보크로아트어"
-
-msgid "Hungarian"
-msgstr "헝가리어"
-
-msgid "BrazilianPortuguese"
-msgstr "브라질 포르투갈어"
-
-msgid "Italian"
-msgstr "이탈리아어"
-
-msgid "Polish"
-msgstr "폴란드어"
-
-msgid "Czech"
-msgstr "체코어"
-
-msgid "Spanish"
-msgstr "스페인어"
-
-msgid "Romanian"
-msgstr "루마니아어"
-
-msgid "Russian"
-msgstr "러시아어"
-
-msgid "Welsh"
-msgstr "웨일스어"
-
-msgid "MiddleWelsh"
-msgstr "중세 웨일스어"
-
-msgid "Bulgarian"
-msgstr "불가리아어"
-
-msgid "AncientGreek"
-msgstr "고대 그리스어"
-
-msgid "ModernGreek"
-msgstr "현대 그리스어"
-
-msgid "Georgian1"
-msgstr "조지아어(간략 전사)"
-
-msgid "Georgian2"
-msgstr "조지아어(정밀 전사)"
-
-msgid "Latin"
+#: Language Names
+msgid "lat"
 msgstr "라틴어"
 
-msgid "Estonian"
-msgstr "에스토니아어"
+msgid "deu"
+msgstr "독일어"
 
-msgid "Finnish"
+msgid "rus"
+msgstr "러시아어"
+
+msgid "ell"
+msgstr "그리스어"
+
+msgid "grc"
+msgstr "그리스어(고대)"
+
+msgid "ita"
+msgstr "이탈리아어"
+
+msgid "spa"
+msgstr "스페인어"
+
+msgid "jpn"
+msgstr "일본어"
+
+msgid "pol"
+msgstr "폴란드어"
+
+msgid "ces"
+msgstr "체코어"
+
+msgid "hbs"
+msgstr "세르보크로아트어"
+
+msgid "ron"
+msgstr "루마니아어"
+
+msgid "hun"
+msgstr "헝가리어"
+
+msgid "vie"
+msgstr "베트남어"
+
+msgid "swe"
+msgstr "스웨덴어"
+
+msgid "nld"
+msgstr "네덜란드어"
+
+msgid "por"
+msgstr "포르투갈어"
+
+msgid "por.br"
+msgstr "포르투갈어(브라질)"
+
+msgid "cym"
+msgstr "웨일스어"
+
+msgid "wlm"
+msgstr "웨일스어(중세)"
+
+msgid "bul"
+msgstr "불가리아어"
+
+msgid "kat"
+msgstr "조지아어"
+
+msgid "kat.narrow"
+msgstr "조지아어(정밀전사)"
+
+msgid "fin"
 msgstr "핀란드어"
 
-msgid "Icelandic"
-msgstr "아이슬란드어"
+msgid "est"
+msgstr "에스토니아어"
 
-msgid "Lithuanian"
+msgid "lav"
+msgstr "라트비아어"
+
+msgid "lit"
 msgstr "리투아니아어"
 
-msgid "Latvian"
-msgstr "라트비아어"
+msgid "isl"
+msgstr "아이슬란드어"
+
+msgid "cat"
+msgstr "카탈루냐어"
+
+msgid "slk"
+msgstr "슬로바키아어"
+
+msgid "slv"
+msgstr "슬로베니아어"
+
+msgid "sqi"
+msgstr "알바니아어"
 
 #: templates/index.html:48
 msgid "Word:"
