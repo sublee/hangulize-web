@@ -1,4 +1,4 @@
 $(function() {
-    $( "[name=lang]" ).val({{ lang|tojson|safe }});
+    $( "[name=lang][value={{ lang }}]" ).attr( "checked", true ).change();
     $( "#word" ).val({{ word|tojson|safe }}).keypress();
 });

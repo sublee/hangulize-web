@@ -43,6 +43,30 @@ label {
   color: #765;
 }
 
+.langs {
+  overflow: hidden;
+  padding: 5px 0;
+  line-height: 20px;
+}
+
+.langs input {
+  display: none;
+}
+
+.langs label {
+  float: left;
+  padding-left: 10px;
+  width: 130px;
+  color: #666;
+  cursor: pointer;
+}
+
+.langs label.selected {
+  font-weight: bolder;
+  color: #333;
+  background: url(checked.gif) no-repeat left 6px;
+}
+
 #word {
   position: relative;
   display: block;

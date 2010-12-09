@@ -2,7 +2,6 @@ $(function() {
 
 // Elements
 var word = $( "#word" ),
-    lang = $( "[name=lang]" ),
     form = word.parent(),
     resultWrapper = $( "#result" ),
     result = resultWrapper.find( "span:eq(0)" );
@@ -42,7 +41,8 @@ var FOLD = true,
                     hangulize.mode = EXPAND;
                     word.removeClass( "loading" );
                     if ( history.replaceState ) {
-                        var enc = encodeURIComponent,
+                        var lang = $( "[name=lang]:checked" ),
+                            enc = encodeURIComponent,
                             qs = "?";
                         qs += "lang=" + enc( lang.val() );
                         qs += "&word=" + enc( word.val() );
@@ -53,15 +53,18 @@ var FOLD = true,
         }, delay );
     },
     shuffle = function() {
-        var script = $( "<script></script>" );
+        var script = $( "<script></script>" ),
+            lang = $( "[name=lang]:checked" );
         script.attr( "src", "/shuffle.js?lang=" + lang.val() );
         script.appendTo( document.body );
     };
 
 // Apply
 word.keypress( hangulize ).keyup( hangulize ).keydown( hangulize );
-lang.change(function() {
+$( "[name=lang]" ).change(function() {
     delete hangulize.prevWord;
+    form.find( "label.selected" ).removeClass( "selected" );
+    $( this ).parent().addClass( "selected" );
     hangulize.call( this );
 });
 $( ".shuffle a" ).click(function() {

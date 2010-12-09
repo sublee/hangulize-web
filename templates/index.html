@@ -38,14 +38,15 @@
   </h1>
   <!-- Transcriptor -->
   <form>
-    <select name="lang">
+    <div class="langs">
       {% for code, label in langs %}
-        <option value="{{ code }}"
-          {% if code == lang %}selected="selected"
-          {% endif %}>{{ label }}</option>
+        <label {% if code == lang %}class="selected"{% endif %}>
+          <input name="lang" value="{{ code }}" type="radio"
+            {% if code == lang %}checked="checked"{% endif %}/>
+          {{ label }}
+        </label>
       {% endfor %}
-    </select>
-    <label for="word">{{ _("Word:") }}</label>
+    </div>
     <input type="text" name="word" id="word" value="{{ word }}"
       autocomplete="off" />
   </form>
