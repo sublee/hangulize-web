@@ -114,6 +114,9 @@ msgstr "Slovenian"
 msgid "sqi"
 msgstr "Albanian"
 
+msgid "epo"
+msgstr "Esperanto"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "Word:"

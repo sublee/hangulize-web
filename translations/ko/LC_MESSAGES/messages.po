@@ -114,6 +114,9 @@ msgstr "슬로베니아어"
 msgid "sqi"
 msgstr "알바니아어"
 
+msgid "epo"
+msgstr "에스페란토"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "단어:"
