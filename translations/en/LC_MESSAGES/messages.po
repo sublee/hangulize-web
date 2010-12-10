@@ -109,7 +109,7 @@ msgid "slk"
 msgstr "Slovak"
 
 msgid "slv"
-msgstr "Slovenian"
+msgstr "Slovene"
 
 msgid "sqi"
 msgstr "Albanian"
