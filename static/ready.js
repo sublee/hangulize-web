@@ -41,7 +41,7 @@ var FOLD = true,
                     hangulize.mode = EXPAND;
                     word.removeClass( "loading" );
                     if ( history.replaceState ) {
-                        var lang = $( "[name=lang]:checked" ),
+                        var lang = $( "[name=lang]" ),
                             enc = encodeURIComponent,
                             qs = "?";
                         qs += "lang=" + enc( lang.val() );
@@ -54,22 +54,76 @@ var FOLD = true,
     },
     shuffle = function() {
         var script = $( "<script></script>" ),
-            lang = $( "[name=lang]:checked" );
+            lang = $( "[name=lang]" );
         script.attr( "src", "/shuffle.js?lang=" + lang.val() );
         script.appendTo( document.body );
+    },
+    improveSelector = function( select, cols ) {
+        select = $( select );
+        select.hide();
+
+        var selectedLang = $( "<div class='selected-lang'></div>" ),
+            langs = $( "<table class='langs'><tr></tr></table>" ),
+            options = select.children(),
+            rows = Math.ceil( options.length / cols );
+
+        for ( var i = 0, j = 0; i < cols; i++ ) {
+            var td = $( "<td></td>" );
+            for ( ; j % rows !== rows - 1; j++ ) {
+                var opt = options.eq( j ),
+                    lang = $( "<a href='#'></a>" );
+                lang.text( opt.text() ).data( "lang", opt.val() );
+                if ( opt.attr( "selected" ) ) {
+                    lang.addClass( "selected" );
+                }
+                lang.click(function() {
+                    var lang = $( this );
+                    select.val( lang.data( "lang" ) ).change();
+                    lang.addClass( "selected" );
+                    langs.hide();
+                    return false;
+                });
+                lang.appendTo( td );
+            }
+            j++;
+            langs.find( "tr" ).append( td );
+        }
+
+        select.change(function() {
+            var select = $( this );
+            langs.find( ".selected" ).removeClass( "selected" );
+            selectedLang.find( "a" ).text( select.find( ":selected" ).text() );
+        });
+
+        selectedLang.html( "<a class='lang' href='#langs'></a>" );
+        selectedLang.find( "a" ).text( select.find( ":selected" ).text() )
+        selectedLang.click(function() {
+            langs.show();
+            return false;
+        });
+        selectedLang.insertAfter( select ).after( langs );
     };
 
 // Apply
 word.keypress( hangulize ).keyup( hangulize ).keydown( hangulize );
-$( "[name=lang]" ).change(function() {
+improveSelector( $( "[name=lang]" ).change(function() {
     delete hangulize.prevWord;
-    form.find( "label.selected" ).removeClass( "selected" );
-    $( this ).parent().addClass( "selected" );
     hangulize.call( this );
-});
+}), 3 );
 $( ".shuffle a" ).click(function() {
     shuffle();
     return false;
+});
+$( $.browser.msie ? document.body : window ).click(function( e ) {
+    $( ".langs" ).each(function() {
+        var langs = $( this ),
+            p = langs.position(),
+            horizontal = e.pageX >= p.left && e.pageX <= p.left + langs.width(),
+            vertical = e.pageY >= p.top && e.pageY <= p.top + langs.height();
+        if ( !(horizontal && vertical) ) {
+            langs.hide();
+        }
+    });
 });
 
 // Default Focus

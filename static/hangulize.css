@@ -7,7 +7,6 @@ body {
   );
   background-repeat: no-repeat;
   background-color: #dedbcc;
-  min-height: 550px;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -43,33 +42,65 @@ label {
   color: #765;
 }
 
-.langs {
-  overflow: hidden;
-  padding: 5px 0;
-  line-height: 20px;
-}
-
-.langs input {
-  display: none;
-}
-
-.langs label {
+.selected-lang {
+  position: relative;
   float: left;
+  margin-bottom: 4px;
+  border: 1px solid #cba;
+  border-bottom-color: #a98;
+  line-height: 20px;
+  background: #eed;
+}
+
+.selected-lang a {
   padding-left: 10px;
-  width: 130px;
+  padding-right: 20px;
+  font-weight: bolder;
+  font-size: 11px;
+  color: #333;
+  text-decoration: none;
+  background: url(down.gif) no-repeat right;
+}
+
+.langs {
+  display: none;
+  clear: left;
+  position: absolute;
+  width: 422px;
+  overflow: hidden;
+  border: 1px solid #cba;
+  border-bottom-color: #a98;
+  line-height: 20px;
+  background: #fff;
+  z-index: 10;
+}
+
+.langs tr, .langs td {
+  border-collapse: collapse;
+}
+
+.langs a {
+  display: block;
+  padding-left: 10px;
+  font-size: 11px;
   color: #666;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.langs label.selected {
+.langs a.selected {
   font-weight: bolder;
   color: #333;
-  background: url(checked.gif) no-repeat left 6px;
+  background: url(checked.gif) no-repeat left;
 }
 
+label.word {
+  margin-left: 0.5em;
+}
 #word {
   position: relative;
   display: block;
+  clear: left;
   width: 402px;
   margin: 0;
   margin-top: 4px;
@@ -142,7 +173,7 @@ label {
 }
 
 .license {
-  margin: 0 auto;
+  margin: 0 auto 40px;
   text-align: center;
   font-size: 11px;
   font-family: "Times New Roman", Times, serif;

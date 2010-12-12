@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta property="og:image" content="http://www.hangulize.org/static/logo.png"/> 
+<meta name="keyword" content="외래어 표기, 한글표기, Korean, Hangul" />
 <title>Hangulize</title>
 <link rel="stylesheet" type="text/css"
   href="{{ url_for("static", filename="hangulize.css") }}" />
@@ -38,15 +39,37 @@
   </h1>
   <!-- Transcriptor -->
   <form>
-    <div class="langs">
+    <select name="lang">
       {% for code, label in langs %}
-        <label {% if code == lang %}class="selected"{% endif %}>
-          <input name="lang" value="{{ code }}" type="radio"
-            {% if code == lang %}checked="checked"{% endif %}/>
-          {{ label }}
-        </label>
+        <option value="{{ code }}"
+          {% if code == lang %}selected="selected"{% endif %}>
+          {{- label -}}
+        </option>
       {% endfor %}
+    </select>
+    <!-- div class="set-lang">
+      <a class="lang" href="#langs">슬로바키아어</a>
     </div>
+    <table id="langs">
+      <tr>
+      {% set cols = 3 %}
+      {% set raws = (langs|length / cols)|round(0, 'ceil') %}
+      {% for code, label in langs %}
+        {% if loop.index % raws == 1 %}
+          <td>
+        {% endif %}
+          <label {% if code == lang %}class="selected"{% endif %}>
+            <input name="lang" value="{{ code }}" type="radio"
+              {% if code == lang %}checked="checked"{% endif %}/>
+            {{ label }}
+          </label>
+        {% if loop.last or loop.index % raws == 0 %}
+          </td>
+        {% endif %}
+      {% endfor %}
+      </tr>
+    </table -->
+    <label class="word" for="word">단어를 한글로 전사:</label>
     <input type="text" name="word" id="word" value="{{ word }}"
       autocomplete="off" />
   </form>
