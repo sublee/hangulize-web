@@ -1,5 +1,3 @@
-$(function() {
-
 // Elements
 var word = $( "#word" ),
     form = word.parent(),
@@ -65,13 +63,16 @@ var FOLD = true,
         var selectedLang = $( "<div class='selected-lang'></div>" ),
             langs = $( "<table class='langs'><tr></tr></table>" ),
             options = select.children(),
+            width = 100 / cols,
             rows = Math.ceil( options.length / cols );
 
         for ( var i = 0, j = 0; i < cols; i++ ) {
             var td = $( "<td></td>" );
+            td.width( width + "%" );
             for ( ; j % rows !== rows - 1; j++ ) {
                 var opt = options.eq( j ),
                     lang = $( "<a href='#'></a>" );
+                opt.data( "mirror", lang );
                 lang.text( opt.text() ).data( "lang", opt.val() );
                 if ( opt.attr( "selected" ) ) {
                     lang.addClass( "selected" );
@@ -79,7 +80,6 @@ var FOLD = true,
                 lang.click(function() {
                     var lang = $( this );
                     select.val( lang.data( "lang" ) ).change();
-                    lang.addClass( "selected" );
                     langs.hide();
                     return false;
                 });
@@ -90,9 +90,11 @@ var FOLD = true,
         }
 
         select.change(function() {
-            var select = $( this );
+            var select = $( this ),
+                opt = select.find( ":selected" );
             langs.find( ".selected" ).removeClass( "selected" );
-            selectedLang.find( "a" ).text( select.find( ":selected" ).text() );
+            opt.data( "mirror" ).addClass( "selected" );
+            selectedLang.find( "a" ).text( opt.text() );
         });
 
         selectedLang.html( "<a class='lang' href='#langs'></a>" );
@@ -127,6 +129,3 @@ $( $.browser.msie ? document.body : window ).click(function( e ) {
 });
 
 // Default Focus
-word.focus();
-
-});

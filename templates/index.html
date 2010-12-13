@@ -31,7 +31,6 @@
   });
 </script>
 <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script> 
-<script src="{{ url_for("static", filename="ready.js") }}"></script>
 </head>
 <body>
   <h1>
@@ -119,6 +118,7 @@
       src="{{ "http://s3.amazonaws.com/github/ribbons/"
               "forkme_right_darkblue_121621.png" }}" />
   </a>
+  <script src="{{ url_for("static", filename="ready.js") }}"></script>
   {% block foot %}
     <script class="shuffle" src="{{ url_for("shuffle") }}"></script>
   {% endblock %}
