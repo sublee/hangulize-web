@@ -66,11 +66,11 @@ var FOLD = true,
             width = 100 / cols,
             rows = Math.ceil( options.length / cols );
 
-        for ( var i = 0, j = 0; i < cols; i++ ) {
+        for ( var i = 0; i < cols; i++ ) {
             var td = $( "<td></td>" );
             td.width( width + "%" );
-            for ( ; j % rows !== rows - 1; j++ ) {
-                var opt = options.eq( j ),
+            for ( var j = 0; j < rows; j++ ) {
+                var opt = options.eq( i * rows + j ),
                     lang = $( "<a href='#'></a>" );
                 opt.data( "mirror", lang );
                 lang.text( opt.text() ).data( "lang", opt.val() );
