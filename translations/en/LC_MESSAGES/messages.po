@@ -117,6 +117,15 @@ msgstr "Albanian"
 msgid "epo"
 msgstr "Esperanto"
 
+msgid "bel"
+msgstr "Belarusian"
+
+msgid "mkd"
+msgstr "Macedonian"
+
+msgid "ukr"
+msgstr "Ukrainian"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "Word:"

@@ -117,6 +117,15 @@ msgstr "알바니아어"
 msgid "epo"
 msgstr "에스페란토"
 
+msgid "bel"
+msgstr "벨라루스어"
+
+msgid "mkd"
+msgstr "마케도니아어"
+
+msgid "ukr"
+msgstr "우크라이나어"
+
 #: templates/index.html:48
 msgid "Word:"
 msgstr "단어:"
