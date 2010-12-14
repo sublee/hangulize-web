@@ -126,10 +126,6 @@ msgstr "Macedonian"
 msgid "ukr"
 msgstr "Ukrainian"
 
-#: templates/index.html:48
-msgid "Word:"
-msgstr "Word:"
-
 #: templates/index.html:58
 msgid "__README__"
 msgstr ""

@@ -127,8 +127,8 @@ msgid "ukr"
 msgstr "우크라이나어"
 
 #: templates/index.html:48
-msgid "Word:"
-msgstr "단어:"
+msgid "word to Hangul:"
+msgstr "단어를 한글로 전사:"
 
 msgid "Fill with a random example"
 msgstr "다른 예제 보기"
