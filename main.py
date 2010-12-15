@@ -91,8 +91,8 @@ def shuffle():
     form of the index page.
     """
     lang = request.args.get('lang') or random.choice(list(get_langs()))[0]
-    lang = lang.replace('.', '_')
-    test = getattr(__import__('tests.%s' % lang), lang)
+    modname = lang.replace('.', '_')
+    test = getattr(__import__('tests.%s' % modname), modname)
     case = [x for x in dir(test) \
               if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
     test = getattr(test, case)
