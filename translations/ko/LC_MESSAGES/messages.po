@@ -126,6 +126,12 @@ msgstr "마케도니아어"
 msgid "ukr"
 msgstr "우크라이나어"
 
+msgid "tur"
+msgstr "터키어"
+
+msgid "aze"
+msgstr "아제르바이잔어"
+
 #: templates/index.html:48
 msgid "word to Hangul:"
 msgstr "단어를 한글로 전사:"
