@@ -5,6 +5,7 @@
 <script>
 $(function() {
   $( "#result" ).css( "margin-top", 0 );
+  hangulize.mode = EXPAND;
 });
 {% if not success %}
   alert({{ reason|tojson|safe }});
