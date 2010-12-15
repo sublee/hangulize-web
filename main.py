@@ -96,8 +96,7 @@ def shuffle():
     case = [x for x in dir(test) \
               if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
     test = getattr(test, case)
-    method = random.choice([x for x in dir(test) if x.startswith('test')])
-    word = random.choice(test.get_examples(method).keys())
+    word = random.choice(test.get_examples().keys())
     context = dict(lang=lang, word=word)
     return render_template('shuffle.js', **context)
 
