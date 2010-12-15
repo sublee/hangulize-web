@@ -91,14 +91,14 @@ def shuffle():
     form of the index page.
     """
     lang = request.args.get('lang') or random.choice(list(get_langs()))[0]
-    test_path = os.path.join(libpath, 'hangulize', 'tests',
-                             lang.replace('.', '_') + '.py')
-    assertion_pattern = re.compile("assert u'(?P<want>.+)' == " \
-                                   "self\.hangulize\(u'(?P<word>.+)'\)")
-    with open(test_path) as f:
-        test_code = ''.join(f.readlines())
-        assertion = random.choice(list(assertion_pattern.finditer(test_code)))
-    context = dict(lang=lang, word=assertion.group('word'))
+    lang = lang.replace('.', '_')
+    test = getattr(__import__('tests.%s' % lang), lang)
+    case = [x for x in dir(test) \
+              if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
+    test = getattr(test, case)
+    method = random.choice([x for x in dir(test) if x.startswith('test')])
+    word = random.choice(test.get_examples(method).keys())
+    context = dict(lang=lang, word=word)
     return render_template('shuffle.js', **context)
 
 
