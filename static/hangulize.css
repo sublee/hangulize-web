@@ -77,6 +77,7 @@ label {
 
 .langs tr, .langs td {
   border-collapse: collapse;
+  vertical-align: top;
 }
 
 .langs a {
