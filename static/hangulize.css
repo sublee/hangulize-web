@@ -13,7 +13,7 @@ body {
   color: #765;
 }
 
-h1, form, .shuffle, #result, #readme, .set-locale {
+h1, form, .shuffle, #result, #readme, .share, .set-locale {
   margin: 0 auto;
   padding: 0;
   width: 422px;
@@ -161,8 +161,9 @@ label.word {
   padding: 0;
 }
 
-.share {
-  text-align: center;
+.share iframe {
+  display: block;
+  float: right;
 }
 
 .set-locale {
@@ -174,6 +175,7 @@ label.word {
 }
 
 .license {
+  clear: right;
   margin: 0 auto 40px;
   text-align: center;
   font-size: 11px;
