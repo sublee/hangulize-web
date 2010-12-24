@@ -161,6 +161,10 @@ label.word {
   padding: 0;
 }
 
+.share {
+  margin-bottom: 5px;
+}
+
 .share iframe {
   display: block;
   float: right;
