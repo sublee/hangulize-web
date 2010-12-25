@@ -1,41 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<meta property="og:image" content="http://www.hangulize.org/static/logo.png"/> 
-<meta name="keyword" content="외래어 표기, 한글표기, Korean, Hangul" />
-<title>Hangulize</title>
-<link rel="stylesheet" type="text/css"
-  href="{{ url_for("static", filename="style.css") }}" />
-<style type="text/css">
-  .wf-nanumgothic-n4-active body {
-    font-family: NanumGothic, sans-serif;
-  }
-  .wf-nanummyeongjo-n4-active #result {
-    font-family: NanumMyeongjo, serif;
-  }
-</style>
-<script src="http://www.google.com/jsapi"></script>
-<script type="text/javascript">
-  google.load( "webfont", "1" );
-  google.setOnLoadCallback(function() {
-    WebFont.load({
-      custom: {
-        families: [ "NanumGothic", "NanumMyeongjo" ],
-        urls: [
-          "http://fontface.kr/NanumGothic/css",
-          "http://fontface.kr/NanumMyeongjo/css"
-        ]
-      }
-    });
-  });
-</script>
-<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script> 
-</head>
-<body>
-  <h1>
-    <img src="{{ url_for("static", filename="logo.png") }}" alt="Hangulize" />
-  </h1>
+{% extends 'base.html' %}
+
+{% block class -%} index {%- endblock %}
+
+{% block import %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css"
+    href="{{ url_for('static', filename='index.css') }}" />
+{% endblock %}
+
+{% block logo %}
+  <img src="{{ url_for('static', filename='logo.png') }}" alt="Hangulize" />
+{% endblock %}
+
+{% block body %}
   <!-- Transcriptor -->
   <form>
     <select name="lang">
@@ -63,65 +40,7 @@
   </div>
   <!-- Share -->
   <div class="share">
-    {% include "fblike.html" %}
-    {% include "tweet.html" %}
+    {% include 'fblike.html' %}
+    {% include 'tweet.html' %}
   </div>
-  <!-- Set Locale -->
-  <form method="post" action="{{ url_for("set_locale") }}" class="set-locale">
-    <input type="hidden" name="locale" value="{{ locale }}" />
-    {% if locale == "ko" %}
-      <em>한국어</em> | <a href="" data-locale="en">English</a>
-    {% else %}
-      <a href="" data-locale="ko">한국어</a> | <em>English</em>
-    {% endif %}
-    <script>
-      $( ".set-locale a" ).click(function() {
-        var self = $( this );
-        var form = self.parent();
-        form.find( "[name=locale]" ).val( self.data( "locale" ) );
-        form.submit();
-        return false;
-      });
-    </script>
-  </form>
-  <!-- License -->
-  <div class="license">
-    &copy; 2010
-    <a href="http://groups.google.com/group/hangulize">Hangulize team</a>.
-    All rights reserved.
-  </div>
-  <!-- GitHub Ribbon -->
-  <a href="http://github.com/sublee/hangulize">
-    <img style="position: absolute; top: 0; right: 0; border: 0;"
-      alt="Fork me on GitHub"
-      src="{{ "http://s3.amazonaws.com/github/ribbons/"
-              "forkme_right_darkblue_121621.png" }}" />
-  </a>
-  <script src="{{ url_for("static", filename="ready.js") }}"></script>
-  {% block foot %}
-    <script class="shuffle" src="{{ url_for("shuffle") }}"></script>
-  {% endblock %}
-  <!-- Google Analytics -->
-  <script>
-    var _gaq = _gaq || [];
-    _gaq.push([ "_setAccount", "UA-19439120-1" ]);
-    _gaq.push([ "_trackPageview" ]);
-
-    (function() {
-      var ga = document.createElement( "script" );
-      ga.type = "text/javascript";
-      ga.async = true;
-      var src;
-      if ( "https:" === document.location.protocol ) {
-        src = "https://ssl";
-      } else {
-        src = "http://www";
-      }
-      src += ".google-analytics.com/ga.js";
-      ga.src = src;
-      var s = document.getElementsByTagName( "script" )[ 0 ];
-      s.parentNode.insertBefore( ga, s );
-    })();
-  </script>
-</body>
-</html>
+{% endblock %}

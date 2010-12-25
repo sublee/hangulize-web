@@ -13,3 +13,6 @@
 [submodule "lib/flask-bebel"]
 	path = lib/flask-bebel
 	url = git://github.com/mitsuhiko/flask-babel.git
+[submodule "lib/markdown"]
+	path = lib/markdown
+	url = git://gitorious.org/python-markdown/mainline.git

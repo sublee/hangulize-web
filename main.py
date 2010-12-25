@@ -85,6 +85,18 @@ def index():
         return render_template('index.html', **context)
 
 
+@app.route('/readme')
+def readme():
+    from markdown import markdown
+    module_path = __import__(hangulize.__module__).__file__
+    readme_path = os.path.join(os.path.split(os.path.split(module_path)[0])[0],
+                               'README.md')
+    with open(readme_path) as readme_file:
+        readme_text = ''.join(readme_file.readlines())
+        readme = markdown(readme_text.decode('utf-8'))
+    return render_template('readme.html', readme=readme)
+
+
 @app.route('/shuffle.js')
 def shuffle():
     """Sends a JavaScript code which fills a random language and word to the

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block class -%} index {%- endblock %}
+
+{% block import %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css"
+    href="{{ url_for('static', filename='doc.css') }}" />
+{% endblock %}
+
+{% block body %}
+  {{ readme|safe }}
+{% endblock %}
