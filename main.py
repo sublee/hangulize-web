@@ -63,7 +63,7 @@ def favicon():
     return app.send_static_file('favicon.ico')
 
 
-def best_mimetype(request, html=True, json=True, plist=True):
+def best_mimetype(html=True, json=True, plist=True):
     mimetypes = []
     if html:
         mimetypes.append('text/html')
@@ -92,7 +92,8 @@ def dump(data, mimetype):
 def lang_dict(lang):
     if not isinstance(lang, Language):
         lang = get_lang(lang)
-    lang_dict = dict(code=lang.code, name=lang.__class__.__name__)
+    lang_dict = dict(code=lang.code, name=lang.__class__.__name__,
+                     label=gettext(lang.code))
     for prop in 'iso639_1', 'iso639_2', 'iso639_3':
         iso639 = getattr(lang, prop)
         if iso639:
@@ -107,7 +108,7 @@ def index():
     lang = request.args.get('lang', 'it')
     context = dict(word=word, lang=lang,
                    langs=get_langs(), locale=get_locale())
-    mimetype = best_mimetype(request)
+    mimetype = best_mimetype()
 
     def get_context(word, lang):
         try:
@@ -136,7 +137,7 @@ def langs():
     import hangulize.langs
     langs = hangulize.langs.get_list()
     data = dict(success=True, langs=map(lang_dict, langs), length=len(langs))
-    mimetype = best_mimetype(request, html=False)
+    mimetype = best_mimetype(html=False)
     return dump(data, mimetype)
 
 
