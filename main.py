@@ -123,10 +123,12 @@ def index():
         return dict(success=False, reason=reason)
 
     if word and lang:
+        data = get_context(word, lang)
         try:
-            return dump(get_context(word, lang), mimetype)
+            return dump(data, mimetype)
         except TypeError:
             pass
+        context.update(**data)
         return render_template('result.html', **context)
     else:
         return render_template('index.html', **context)
