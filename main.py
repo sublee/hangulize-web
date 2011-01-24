@@ -8,11 +8,10 @@ sys.path.insert(0, os.path.join(libpath, 'hangulize'))
 sys.path.insert(0, libpath)
 import re
 import random
-import plistlib
 from google.appengine.ext.webapp.util import run_wsgi_app
 from flask import *
 from flaskext.babel import Babel, gettext
-from hangulize import hangulize, get_lang, InvalidCodeError
+from hangulize import hangulize, get_lang, Language, InvalidCodeError
 
 
 LOCALES = ['ko', 'en']
@@ -64,6 +63,43 @@ def favicon():
     return app.send_static_file('favicon.ico')
 
 
+def best_mimetype(request, html=True, json=True, plist=True):
+    mimetypes = []
+    if html:
+        mimetypes.append('text/html')
+    if json:
+        mimetypes.append('application/json')
+        if request.is_xhr:
+            return mimetypes.pop()
+    if plist:
+        mimetypes.append('application/x-plist')
+        mimetypes.append('application/plist+xml')
+    return request.accept_mimetypes.best_match(mimetypes) or ''
+
+
+def dump(data, mimetype):
+    if 'json' in mimetype:
+        return jsonify(**data)
+    elif 'plist' in mimetype:
+        try:
+            import plistlib
+            return plistlib.writePlistToString(data)
+        except ImportError:
+            pass
+    raise TypeError('%s is not supported to dump' % mimetype)
+
+
+def lang_dict(lang):
+    if not isinstance(lang, Language):
+        lang = get_lang(lang)
+    lang_dict = dict(code=lang.code, name=lang.__class__.__name__)
+    for prop in 'iso639_1', 'iso639_2', 'iso639_3':
+        iso639 = getattr(lang, prop)
+        if iso639:
+            lang_dict[prop.replace('_', '-')] = iso639
+    return lang_dict
+
+
 @app.route('/')
 def index():
     """The index page."""
@@ -71,22 +107,13 @@ def index():
     lang = request.args.get('lang', 'it')
     context = dict(word=word, lang=lang,
                    langs=get_langs(), locale=get_locale())
-
-    provided_mimetypes = 'application/json', 'application/x-plist', \
-                         'application/plist+xml', 'text/html'
-    mimetype = request.accept_mimetypes.best_match(provided_mimetypes) or ''
+    mimetype = best_mimetype(request)
 
     def get_context(word, lang):
         try:
             result = hangulize(unicode(word), lang)
-            language = get_lang(lang)
-            lang_dict = dict(code=language.code,
-                             name=language.__class__.__name__)
-            for prop in 'iso639_1', 'iso639_2', 'iso639_3':
-                iso639 = getattr(language, prop)
-                if iso639:
-                    lang_dict[prop.replace('_', '-')] = iso639
-            return dict(success=True, result=result, word=word, lang=lang_dict)
+            return dict(success=True,
+                        result=result, word=word, lang=lang_dict(lang))
         except (InvalidCodeError, ImportError):
             reason = '\'%s\' is not supported language or ' \
                      'invalid ISO639-3 code' % lang
@@ -95,15 +122,22 @@ def index():
         return dict(success=False, reason=reason)
 
     if word and lang:
-        if 'json' in mimetype or request.is_xhr:
-            return jsonify(**get_context(word, lang))
-        elif 'plist' in mimetype:
-            return plistlib.writePlistToString(get_context(word, lang))
-        else:
-            context.update(**get_context(word, lang));
-            return render_template('result.html', **context)
+        try:
+            return dump(get_context(word, lang), mimetype)
+        except TypeError:
+            pass
+        return render_template('result.html', **context)
     else:
         return render_template('index.html', **context)
+
+
+@app.route('/langs')
+def langs():
+    import hangulize.langs
+    langs = hangulize.langs.get_list()
+    data = dict(success=True, langs=map(lang_dict, langs), length=len(langs))
+    mimetype = best_mimetype(request, html=False)
+    return dump(data, mimetype)
 
 
 @app.route('/readme')
