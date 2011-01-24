@@ -8,10 +8,11 @@ sys.path.insert(0, os.path.join(libpath, 'hangulize'))
 sys.path.insert(0, libpath)
 import re
 import random
+import plistlib
 from google.appengine.ext.webapp.util import run_wsgi_app
 from flask import *
 from flaskext.babel import Babel, gettext
-from hangulize import hangulize, LanguageError
+from hangulize import hangulize, get_lang, InvalidCodeError
 
 
 LOCALES = ['ko', 'en']
@@ -70,15 +71,34 @@ def index():
     lang = request.args.get('lang', 'it')
     context = dict(word=word, lang=lang,
                    langs=get_langs(), locale=get_locale())
+
+    provided_mimetypes = 'application/json', 'application/x-plist', \
+                         'application/plist+xml', 'text/html'
+    mimetype = request.accept_mimetypes.best_match(provided_mimetypes) or ''
+
+    def get_context(word, lang):
+        try:
+            result = hangulize(unicode(word), lang)
+            language = get_lang(lang)
+            lang_dict = dict(code=language.code,
+                             name=language.__class__.__name__)
+            for prop in 'iso639_1', 'iso639_2', 'iso639_3':
+                iso639 = getattr(language, prop)
+                if iso639:
+                    lang_dict[prop.replace('_', '-')] = iso639
+            return dict(success=True, result=result, word=word, lang=lang_dict)
+        except (InvalidCodeError, ImportError):
+            reason = '\'%s\' is not supported language or ' \
+                     'invalid ISO639-3 code' % lang
+        except Exception, e:
+            reason = str(e)
+        return dict(success=False, reason=reason)
+
     if word and lang:
-        def get_context(word, lang):
-            try:
-                result = hangulize(unicode(word), lang)
-                return dict(success=True, result=result)
-            except LanguageError, e:
-                return dict(success=False, reason=str(e))
-        if request.is_xhr:
+        if 'json' in mimetype or request.is_xhr:
             return jsonify(**get_context(word, lang))
+        elif 'plist' in mimetype:
+            return plistlib.writePlistToString(get_context(word, lang))
         else:
             context.update(**get_context(word, lang));
             return render_template('result.html', **context)
