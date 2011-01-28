@@ -15,6 +15,7 @@ from hangulize import hangulize, get_lang, Language, InvalidCodeError
 
 
 LOCALES = ['ko', 'en']
+JSONP_PARAM = 'jsonp'
 
 
 app = Flask(__name__)
@@ -57,29 +58,39 @@ def get_langs():
     return sorted(iter(), cmp=compare)
 
 
-@app.route('/favicon.ico')
-def favicon():
-    """Sends the favicon file."""
-    return app.send_static_file('favicon.ico')
+def get_example(lang=None):
+    lang = lang or random.choice(list(get_langs()))[0]
+    modname = lang.replace('.', '_')
+    test = getattr(__import__('tests.%s' % modname), modname)
+    case = [x for x in dir(test) \
+              if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
+    test = getattr(test, case)
+    word = random.choice(test.get_examples().keys())
+    return lang, word
 
 
 def best_mimetype(html=True, json=True, plist=True):
     mimetypes = []
-    if html:
-        mimetypes.append('text/html')
     if json:
         mimetypes.append('application/json')
-        if request.is_xhr:
+        if request.is_xhr or request.args.get(JSONP_PARAM):
             return mimetypes.pop()
     if plist:
         mimetypes.append('application/x-plist')
         mimetypes.append('application/plist+xml')
+    if html:
+        mimetypes.append('text/html')
     return request.accept_mimetypes.best_match(mimetypes) or ''
 
 
-def dump(data, mimetype):
+def dump(data, mimetype=None):
+    mimetype = mimetype or best_mimetype()
     if 'json' in mimetype:
-        return jsonify(**data)
+        json = jsonify(**data)
+        jsonp = request.args.get(JSONP_PARAM)
+        if jsonp:
+            json.data = '%s(%s)' % (jsonp, json.data)
+        return json
     elif 'plist' in mimetype:
         try:
             import plistlib
@@ -104,12 +115,6 @@ def lang_dict(lang):
 @app.route('/')
 def index():
     """The index page."""
-    word = request.args.get('word', '')
-    lang = request.args.get('lang', 'it')
-    context = dict(word=word, lang=lang,
-                   langs=get_langs(), locale=get_locale())
-    mimetype = best_mimetype()
-
     def get_context(word, lang):
         try:
             result = hangulize(unicode(word), lang)
@@ -122,16 +127,22 @@ def index():
             reason = str(e)
         return dict(success=False, reason=reason)
 
-    if word and lang:
-        data = get_context(word, lang)
-        try:
-            return dump(data, mimetype)
-        except TypeError:
-            pass
+    word = request.args.get('word')
+    lang = request.args.get('lang')
+    context = dict(langs=get_langs(), locale=get_locale())
+    mimetype = best_mimetype()
+
+    if not word:
+        if 'html' in mimetype:
+            return render_template('index.html', **context)
+        lang, word = get_example(lang)
+
+    data = get_context(word, lang)
+    try:
+        return dump(data, mimetype)
+    except TypeError:
         context.update(**data)
         return render_template('result.html', **context)
-    else:
-        return render_template('index.html', **context)
 
 
 @app.route('/langs')
@@ -143,32 +154,20 @@ def langs():
     return dump(data, mimetype)
 
 
-@app.route('/readme')
-def readme():
-    from markdown import markdown
-    module_path = __import__(hangulize.__module__).__file__
-    readme_path = os.path.join(os.path.split(os.path.split(module_path)[0])[0],
-                               'README.md')
-    with open(readme_path) as readme_file:
-        readme_text = ''.join(readme_file.readlines())
-        readme = markdown(readme_text.decode('utf-8'))
-    return render_template('readme.html', readme=readme)
-
-
 @app.route('/shuffle.js')
 def shuffle():
     """Sends a JavaScript code which fills a random language and word to the
     form of the index page.
     """
-    lang = request.args.get('lang') or random.choice(list(get_langs()))[0]
-    modname = lang.replace('.', '_')
-    test = getattr(__import__('tests.%s' % modname), modname)
-    case = [x for x in dir(test) \
-              if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
-    test = getattr(test, case)
-    word = random.choice(test.get_examples().keys())
+    lang, word = get_example(request.args.get('lang'))
     context = dict(lang=lang, word=word)
     return render_template('shuffle.js', **context)
+
+
+@app.route('/favicon.ico')
+def favicon():
+    """Sends the favicon file."""
+    return app.send_static_file('favicon.ico')
 
 
 if __name__ == '__main__':
