@@ -112,46 +112,49 @@ def lang_dict(lang):
     return lang_dict
 
 
+def get_result(lang, word):
+    try:
+        result = hangulize(unicode(word), lang)
+        return dict(success=True,
+                    result=result, word=word, lang=lang_dict(lang))
+    except (InvalidCodeError, ImportError):
+        reason = '\'%s\' is not supported language or ' \
+                 'invalid ISO639-3 code' % lang
+    except Exception, e:
+        reason = str(e)
+    return dict(success=False, reason=reason)
+
+
 @app.route('/')
 def index():
     """The index page."""
-    def get_context(word, lang):
-        try:
-            result = hangulize(unicode(word), lang)
-            return dict(success=True,
-                        result=result, word=word, lang=lang_dict(lang))
-        except (InvalidCodeError, ImportError):
-            reason = '\'%s\' is not supported language or ' \
-                     'invalid ISO639-3 code' % lang
-        except Exception, e:
-            reason = str(e)
-        return dict(success=False, reason=reason)
-
-    word = request.args.get('word')
     lang = request.args.get('lang')
+    word = request.args.get('word')
     context = dict(langs=get_langs(), locale=get_locale())
-    mimetype = best_mimetype()
-
-    if not word:
-        if 'html' in mimetype:
-            return render_template('index.html', **context)
-        lang, word = get_example(lang)
-
-    data = get_context(word, lang)
-    try:
-        return dump(data, mimetype)
-    except TypeError:
-        context.update(**data)
-        return render_template('result.html', **context)
+    if lang and word:
+        data = get_result(lang, word)
+        try:
+            return dump(data)
+        except TypeError:
+            context.update(**data)
+            return render_template('result.html', **context)
+    return render_template('index.html', **context)
 
 
 @app.route('/langs')
 def langs():
+    """The language list."""
     import hangulize.langs
     langs = hangulize.langs.get_list()
     data = dict(success=True, langs=map(lang_dict, langs), length=len(langs))
     mimetype = best_mimetype(html=False)
     return dump(data, mimetype)
+
+
+@app.route('/example')
+def example():
+    lang, word = get_example(request.args.get('lang'))
+    return dump(get_result(lang, word))
 
 
 @app.route('/shuffle.js')
