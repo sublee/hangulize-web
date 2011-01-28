@@ -3,15 +3,14 @@ body {
   padding: 30px 80px;
   font-family: sans-serif;
   color: #765;
-
   background-image: -webkit-gradient(
-    radial, 50% 135, 0, 50% 200, 250, from(#ffe), to(#e9e6d7)
+    radial, 50% 135, 0, 50% 75, 300, from(#e4dfcc), to(#f6f6eb)
   );
   background-image: -moz-radial-gradient(
-    50% 135px 45deg, circle closest-side, #ffe 0, #e9e6d7 200px
+    50% 135px 45deg, circle closest-side, #e4dfcc 0, #f6f6eb 300px
   );
   background-repeat: no-repeat;
-  background-color: #e9e6d7;
+  background-color: #f6f6eb;
 }
 
 .logo {
@@ -29,7 +28,7 @@ div.share iframe {
 }
 
 form.set-locale {
-  border-top: 1px solid #cba;
+  border-top: 1px solid #e9e6d7;
   padding-top: 9px;
   text-align: center;
   font-size: 11px;

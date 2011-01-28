@@ -31,10 +31,10 @@ label {
   position: relative;
   float: left;
   margin-bottom: 4px;
-  border: 1px solid #cba;
-  border-bottom-color: #a98;
+  border: 1px solid #e4dfcc;
+  border-top-color: #cba;
   line-height: 20px;
-  background: #eed;
+  background: #f6f6eb;
 }
 
 .selected-lang a {
@@ -53,8 +53,8 @@ label {
   position: absolute;
   width: 422px;
   overflow: hidden;
-  border: 1px solid #cba;
-  border-bottom-color: #a98;
+  border: 1px solid #e4dfcc;
+  border-bottom-color: #cba;
   line-height: 20px;
   background: #fff;
   z-index: 10;
@@ -91,7 +91,7 @@ label.word {
   margin: 0;
   margin-top: 4px;
   padding: 9px;
-  border: 1px solid #cba;
+  border: 1px solid #e4dfcc;
   font-size: 30px;
   font-family: "Times New Roman", Times, serif;
   line-height: 30px;
@@ -110,12 +110,12 @@ label.word {
   font-family: serif;
   line-height: 30px;
   color: #333;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(228, 223, 204, 0.2);
 }
 
 #result p {
   margin: 0;
-  border: 1px solid #a98;
+  border: 1px solid #cba;
   border-top: none;
 }
 
@@ -138,6 +138,7 @@ label.word {
 #readme {
   margin-top: 5px;
   margin-bottom: 8px;
+  line-height: 1.4;
   color: #333;
 }
 
