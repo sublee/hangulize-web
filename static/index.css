@@ -1,14 +1,3 @@
-body {
-  background-image: -webkit-gradient(
-    radial, 50% 135, 0, 50% 200, 250, from(#ffe), to(#dedbcc)
-  );
-  background-image: -moz-radial-gradient(
-    50% 135px 45deg, circle closest-side, #ffe 0, #dedbcc 200px
-  );
-  background-repeat: no-repeat;
-  background-color: #dedbcc;
-}
-
 .logo, form, .shuffle, #result, #readme, .share, .set-locale {
   margin: 0 auto;
   padding: 0;

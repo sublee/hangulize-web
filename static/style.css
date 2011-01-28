@@ -3,6 +3,15 @@ body {
   padding: 30px 80px;
   font-family: sans-serif;
   color: #765;
+
+  background-image: -webkit-gradient(
+    radial, 50% 135, 0, 50% 200, 250, from(#ffe), to(#e9e6d7)
+  );
+  background-image: -moz-radial-gradient(
+    50% 135px 45deg, circle closest-side, #ffe 0, #e9e6d7 200px
+  );
+  background-repeat: no-repeat;
+  background-color: #e9e6d7;
 }
 
 .logo {
@@ -48,9 +57,12 @@ form.set-locale {
 
 .license a:link, .license a:visited {
   color: #333;
-  text-decoration: none;
 }
 
-.set-locale a:hover, .license a:hover {
+a:link, a:visited {
+  color: #369;
+  text-decoration: none;
+}
+a:hover {
   text-decoration: underline;
 }
