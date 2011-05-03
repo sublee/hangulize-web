@@ -2,4 +2,5 @@
 *.pyo
 *.mo
 *.sh
+*.swp
 logs
