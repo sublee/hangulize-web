@@ -6,11 +6,16 @@ for dirname in (x for x in os.listdir(libpath) if x != 'hangulize'):
     sys.path.insert(0, os.path.join(libpath, dirname))
 sys.path.insert(0, os.path.join(libpath, 'hangulize'))
 sys.path.insert(0, libpath)
+
 import re
 import random
-from google.appengine.ext.webapp.util import run_wsgi_app
+from datetime import datetime
+
 from flask import *
 from flaskext.babel import Babel, gettext
+from google.appengine.ext.webapp.util import run_wsgi_app
+from pytz import timezone, utc
+
 from hangulize import hangulize, get_lang, Language, InvalidCodeError
 
 
@@ -130,7 +135,13 @@ def index():
     """The index page."""
     lang = request.args.get('lang')
     word = request.args.get('word')
-    context = dict(langs=get_langs(), locale=get_locale())
+    kor_tz = timezone('Asia/Seoul')
+    kor_dt = datetime.utcnow().replace(tzinfo=utc).astimezone(kor_tz)
+    if (kor_dt.month, kor_dt.day) == (10, 9):
+        logo_name = 'logo-hangul.png'
+    else:
+        logo_name = 'logo.png'
+    context = dict(langs=get_langs(), locale=get_locale(), logo_name=logo_name)
     if lang and word:
         data = get_result(lang, word)
         try:
