@@ -135,7 +135,7 @@ msgstr "Azerbaijani"
 #: templates/index.html:58
 msgid "__README__"
 msgstr ""
-"'Hangulize' is an application which automatically transcribes a non-Korean "
+"Hangulize is an application which automatically transcribes a non-Korean "
 "word into hangul, the Korean alphabet. Select the original language from the "
 "list and enter the word you want to transcribe into hangul in the box above. "
 "The hangul transcription will be displayed."

@@ -1,7 +1,9 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
 body {
   margin: 0;
   padding: 30px 80px;
-  font-family: sans-serif;
+  font-family: NanumGothic, "Nanum Gothic", sans-serif;
   color: #765;
   background-image: -webkit-gradient(
     radial, 50% 135, 0, 50% 75, 300, from(#e4dfcc), to(#f6f6eb)

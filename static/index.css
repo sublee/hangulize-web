@@ -1,3 +1,20 @@
+/*
+  @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
+  We couldn't choose the regular Nanum Myeongjo with the original CSS file.
+  Because Regular and Extra Bold are both set to 400-weight.
+*/
+@font-face {
+  font-family: 'Nanum Myeongjo';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanummyeongjo/v2/NanumMyeongjo-Regular.eot);
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanummyeongjo/v2/NanumMyeongjo-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanummyeongjo/v2/NanumMyeongjo-Regular.woff2) format('x-woff2'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanummyeongjo/v2/NanumMyeongjo-Regular.woff) format('woff'),
+       url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanummyeongjo/v2/NanumMyeongjo-Regular.ttf) format('truetype');
+}
+
 .logo, form, .shuffle, #result, #readme, .share, .set-locale {
   margin: 0 auto;
   padding: 0;
@@ -107,7 +124,7 @@ label.word {
   position: relative;
   margin-top: -47px;
   font-size: 30px;
-  font-family: serif;
+  font-family: NanumMyeongjo, "Nanum Myeongjo", serif;
   line-height: 30px;
   color: #333;
   background: rgba(228, 223, 204, 0.2);
