@@ -1,6 +1,6 @@
 application: hangulize
 version: 0-1-dev
-runtime: python27
+runtime: python
 threadsafe: false
 api_version: 1
 
