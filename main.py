@@ -16,7 +16,8 @@ from flaskext.babel import Babel, gettext
 from google.appengine.ext.webapp.util import run_wsgi_app
 from pytz import timezone, utc
 
-from hangulize import hangulize, get_lang, Language
+from hangulize import hangulize, get_lang
+from hangulize.models import Language
 
 
 LOCALES = ['ko', 'en']
