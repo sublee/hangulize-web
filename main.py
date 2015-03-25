@@ -16,7 +16,7 @@ from flaskext.babel import Babel, gettext
 from google.appengine.ext.webapp.util import run_wsgi_app
 from pytz import timezone, utc
 
-from hangulize import hangulize, get_lang, Language, InvalidCodeError
+from hangulize import hangulize, get_lang, Language
 
 
 LOCALES = ['ko', 'en']
@@ -122,7 +122,7 @@ def get_result(lang, word):
         result = hangulize(unicode(word), lang)
         return dict(success=True,
                     result=result, word=word, lang=lang_dict(lang))
-    except (InvalidCodeError, ImportError):
+    except (ValueError, ImportError):
         reason = '\'%s\' is not supported language or ' \
                  'invalid ISO639-3 code' % lang
     except Exception, e:
