@@ -8,16 +8,7 @@
 """
 from __future__ import with_statement
 from datetime import datetime
-import os
 import random
-import sys
-
-# include lib/ into the Python path.
-lib_path = os.path.abspath('lib')
-for dirname in (x for x in os.listdir(lib_path) if x != 'hangulize'):
-    sys.path.insert(0, os.path.join(lib_path, dirname))
-sys.path.insert(0, os.path.join(lib_path, 'hangulize'))
-sys.path.insert(0, lib_path)
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flaskext.babel import Babel, gettext
