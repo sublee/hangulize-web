@@ -1,23 +1,33 @@
+# -*- coding: utf-8 -*-
+"""
+    hangulizeweb
+    ~~~~~~~~~~~~
+
+    The Flask application to use Hangulize.
+
+"""
 from __future__ import with_statement
-import sys
-import os
-libpath = os.path.abspath('lib')
-for dirname in (x for x in os.listdir(libpath) if x != 'hangulize'):
-    sys.path.insert(0, os.path.join(libpath, dirname))
-sys.path.insert(0, os.path.join(libpath, 'hangulize'))
-sys.path.insert(0, libpath)
-
-import re
-import random
 from datetime import datetime
+import os
+import random
+import sys
 
-from flask import *
+# include lib/ into the Python path.
+lib_path = os.path.abspath('lib')
+for dirname in (x for x in os.listdir(lib_path) if x != 'hangulize'):
+    sys.path.insert(0, os.path.join(lib_path, dirname))
+sys.path.insert(0, os.path.join(lib_path, 'hangulize'))
+sys.path.insert(0, lib_path)
+
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flaskext.babel import Babel, gettext
-from google.appengine.ext.webapp.util import run_wsgi_app
 from pytz import timezone, utc
 
 from hangulize import hangulize, get_lang
 from hangulize.models import Language
+
+
+__all__ = ['app']
 
 
 LOCALES = ['ko', 'en']
@@ -68,8 +78,8 @@ def get_example(lang=None):
     lang = lang or random.choice(list(get_langs()))[0]
     modname = lang.replace('.', '_')
     test = getattr(__import__('tests.%s' % modname), modname)
-    case = [x for x in dir(test) \
-              if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
+    case = [x for x in dir(test)
+            if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
     test = getattr(test, case)
     word = random.choice(test.get_examples().keys())
     return lang, word
@@ -183,7 +193,3 @@ def shuffle():
 def favicon():
     """Sends the favicon file."""
     return app.send_static_file('favicon.ico')
-
-
-if __name__ == '__main__':
-    run_wsgi_app(app)
