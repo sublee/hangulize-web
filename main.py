@@ -1,11 +1,11 @@
 from __future__ import with_statement
 import sys
 import os
-libpath = os.path.abspath('lib')
-for dirname in (x for x in os.listdir(libpath) if x != 'hangulize'):
-    sys.path.insert(0, os.path.join(libpath, dirname))
-sys.path.insert(0, os.path.join(libpath, 'hangulize'))
-sys.path.insert(0, libpath)
+# libpath = os.path.abspath('lib')
+# for dirname in (x for x in os.listdir(libpath) if x != 'hangulize'):
+#     sys.path.insert(0, os.path.join(libpath, dirname))
+# sys.path.insert(0, os.path.join(libpath, 'hangulize'))
+# sys.path.insert(0, libpath)
 
 import re
 import random

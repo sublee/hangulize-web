@@ -4,6 +4,14 @@ runtime: python
 threadsafe: false
 api_version: 1
 
+libraries:
+- name: babel
+- name: pytz
+- name: flask
+- name: flask-babel
+- name: hangulize
+- name: markdown
+
 handlers:
 - url: /favicon.ico
   static_files: static/favicon.ico
