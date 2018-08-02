@@ -1,5 +1,3 @@
-application: ornate-opus-89509
-version: 0-1-dev
 runtime: python27
 threadsafe: true
 api_version: 1
