@@ -9,12 +9,14 @@
 from __future__ import with_statement
 from datetime import datetime
 import random
+import urllib
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flaskext.babel import Babel, gettext
+from google.appengine.api import urlfetch
 from pytz import timezone, utc
 
-from hangulize import hangulize, get_lang
+from hangulize import get_lang
 from hangulize.models import Language
 
 
@@ -117,6 +119,17 @@ def lang_dict(lang):
         if iso639:
             lang_dict[prop.replace('_', '-')] = iso639
     return lang_dict
+
+
+def hangulize(word, lang):
+    s_word = urllib.quote(word.encode('utf-8'))
+    s_lang = urllib.quote(lang)
+
+    api = 'https://api.hangulize.org/v2'
+    r = urlfetch.fetch(api + '/hangulized/%s/%s' % (s_lang, s_word),
+                       headers={'Accept': 'text/plain'})
+
+    return r.content
 
 
 def get_result(lang, word):
