@@ -16,3 +16,6 @@
 [submodule "lib/markdown"]
 	path = lib/markdown
 	url = https://gitorious.org/python-markdown/mainline.git
+[submodule "lib/requests"]
+	path = lib/requests
+	url = https://github.com/requests/requests.git
