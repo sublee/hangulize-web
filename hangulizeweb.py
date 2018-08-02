@@ -32,6 +32,9 @@ app.config['BABEL_DEFAULT_LOCALE'] = 'ko'
 babel = Babel(app)
 
 
+api = 'https://api.hangulize.org/v2'
+
+
 @babel.localeselector
 def get_locale():
     """Returns a best matched language. It finds a language from the GET
@@ -125,7 +128,6 @@ def hangulize(word, lang):
     s_word = urllib.quote(word.encode('utf-8'))
     s_lang = urllib.quote(lang)
 
-    api = 'https://api.hangulize.org/v2'
     r = urlfetch.fetch(api + '/hangulized/%s/%s' % (s_lang, s_word),
                        headers={'Accept': 'text/plain'})
 
