@@ -72,16 +72,21 @@ def fetch_specs():
     return specs
 
 
+def get_local_name(spec):
+    """Returns the local name of the language of the given spec. It supports
+    only for Korean and English.
+    """
+    attr = {'ko': 'korean', 'en': 'english'}[get_locale()]
+    name = spec['lang'][attr]
+    return name
+
+
 def get_langs():
     """Returns the allowed languages in :mod:`hangulize`."""
     def iter():
         for lang, spec in fetch_specs().items():
-            attr = {'ko': 'korean', 'en': 'english'}[get_locale()]
-            name = spec['lang'][attr]
-            yield lang, name
-    def compare(x, y):
-        return cmp(x[1], y[1])
-    return sorted(iter(), cmp=compare)
+            yield lang, get_local_name(spec)
+    return sorted(iter(), key=lambda x: x[1])
 
 
 def get_example(lang=None):
@@ -126,14 +131,15 @@ def dump(data, mimetype=None):
 
 
 def lang_dict(lang):
-    if not isinstance(lang, Language):
-        lang = get_lang(lang)
-    lang_dict = dict(code=lang.code, name=lang.__class__.__name__,
-                     label=gettext(lang.code))
-    for prop in 'iso639_1', 'iso639_2', 'iso639_3':
-        iso639 = getattr(lang, prop)
-        if iso639:
-            lang_dict[prop.replace('_', '-')] = iso639
+    specs = fetch_specs()
+    spec = specs[lang]
+
+    lang_dict = {'code': lang,
+                 'name': spec['lang']['english'],
+                 'label': get_local_name(spec),
+                 'iso639-1': spec['lang']['codes'][0],
+                 'iso639-3': spec['lang']['codes'][1]}
+
     return lang_dict
 
 
@@ -185,9 +191,8 @@ def index():
 @app.route('/langs')
 def langs():
     """The language list."""
-    import hangulize.langs
-    langs = hangulize.langs.get_list()
-    data = dict(success=True, langs=map(lang_dict, langs), length=len(langs))
+    specs = fetch_specs()
+    data = dict(success=True, langs=map(lang_dict, specs), length=len(specs))
     mimetype = best_mimetype(html=False)
     return dump(data, mimetype)
 
