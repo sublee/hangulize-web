@@ -144,6 +144,16 @@ def lang_dict(lang):
 
 def hangulize(word, lang):
     """Transcribes the given word via the v2 API."""
+
+    # Respond quickly if the given word is in the test examples.
+    specs = fetch_specs()
+    spec = specs[lang]
+
+    for exm in spec['test']:
+        if exm['word'] == word:
+            return exm['transcribed']
+
+    # Otherwise, fetch the result from the v2 API.
     s_word = urllib.quote(word.encode('utf-8'))
     s_lang = urllib.quote(lang)
 
