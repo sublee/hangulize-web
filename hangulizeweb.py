@@ -64,6 +64,7 @@ specs = {}
 
 
 def fetch_specs():
+    """Fetches and caches the specs from the v2 API."""
     if specs:
         return specs
 
@@ -90,6 +91,7 @@ def get_langs():
 
 
 def get_example(lang=None):
+    """Returns a random example for the given or any language."""
     lang = lang or random.choice(list(get_langs()))[0]
 
     specs = fetch_specs()
@@ -144,6 +146,7 @@ def lang_dict(lang):
 
 
 def hangulize(word, lang):
+    """Transcribes the given word via the v2 API."""
     s_word = urllib.quote(word.encode('utf-8'))
     s_lang = urllib.quote(lang)
 
