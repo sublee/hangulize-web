@@ -8,16 +8,14 @@
 """
 from __future__ import with_statement
 from datetime import datetime
+import json
 import random
 import urllib
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
-from flaskext.babel import Babel, gettext
+from flaskext.babel import Babel
 from google.appengine.api import urlfetch
 from pytz import timezone, utc
-
-from hangulize import get_lang
-from hangulize.models import Language
 
 
 __all__ = ['app']
@@ -59,26 +57,45 @@ def set_locale():
     return response
 
 
+specs = {}
+
+
+def fetch_specs():
+    """Fetches and caches the specs from the v2 API."""
+    if specs:
+        return specs
+
+    r = urlfetch.fetch(api + '/specs', headers={'Accept': 'application/json'})
+    specs.update({s['lang']['id']: s for s in json.loads(r.content)['specs']})
+    return specs
+
+
+def get_local_name(spec):
+    """Returns the local name of the language of the given spec. It supports
+    only for Korean and English.
+    """
+    attr = {'ko': 'korean', 'en': 'english'}[get_locale()]
+    name = spec['lang'][attr]
+    return name
+
+
 def get_langs():
     """Returns the allowed languages in :mod:`hangulize`."""
-    import hangulize.langs
     def iter():
-        for code in hangulize.langs.get_list():
-            yield code, gettext(code)
-    def compare(x, y):
-        return cmp(x[1], y[1])
-    return sorted(iter(), cmp=compare)
+        for lang, spec in fetch_specs().items():
+            yield lang, get_local_name(spec)
+    return sorted(iter(), key=lambda x: x[1])
 
 
 def get_example(lang=None):
+    """Returns a random example for the given or any language."""
     lang = lang or random.choice(list(get_langs()))[0]
-    modname = lang.replace('.', '_')
-    test = getattr(__import__('tests.%s' % modname), modname)
-    case = [x for x in dir(test)
-            if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
-    test = getattr(test, case)
-    word = random.choice(test.get_examples().keys())
-    return lang, word
+
+    specs = fetch_specs()
+    spec = specs[lang]
+    example = random.choice(spec['test'])
+
+    return lang, example['word']
 
 
 def best_mimetype(html=True, json=True, plist=True):
@@ -113,25 +130,37 @@ def dump(data, mimetype=None):
 
 
 def lang_dict(lang):
-    if not isinstance(lang, Language):
-        lang = get_lang(lang)
-    lang_dict = dict(code=lang.code, name=lang.__class__.__name__,
-                     label=gettext(lang.code))
-    for prop in 'iso639_1', 'iso639_2', 'iso639_3':
-        iso639 = getattr(lang, prop)
-        if iso639:
-            lang_dict[prop.replace('_', '-')] = iso639
+    specs = fetch_specs()
+    spec = specs[lang]
+
+    lang_dict = {'code': lang,
+                 'name': spec['lang']['english'],
+                 'label': get_local_name(spec),
+                 'iso639-1': spec['lang']['codes'][0],
+                 'iso639-3': spec['lang']['codes'][1]}
+
     return lang_dict
 
 
 def hangulize(word, lang):
+    """Transcribes the given word via the v2 API."""
+
+    # Respond quickly if the given word is in the test examples.
+    specs = fetch_specs()
+    spec = specs[lang]
+
+    for exm in spec['test']:
+        if exm['word'] == word:
+            return exm['transcribed']
+
+    # Otherwise, fetch the result from the v2 API.
     s_word = urllib.quote(word.encode('utf-8'))
     s_lang = urllib.quote(lang)
 
     r = urlfetch.fetch(api + '/hangulized/%s/%s' % (s_lang, s_word),
                        headers={'Accept': 'text/plain'})
 
-    return r.content
+    return r.content.decode('utf-8')
 
 
 def get_result(lang, word):
@@ -172,9 +201,8 @@ def index():
 @app.route('/langs')
 def langs():
     """The language list."""
-    import hangulize.langs
-    langs = hangulize.langs.get_list()
-    data = dict(success=True, langs=map(lang_dict, langs), length=len(langs))
+    specs = fetch_specs()
+    data = dict(success=True, langs=map(lang_dict, specs), length=len(specs))
     mimetype = best_mimetype(html=False)
     return dump(data, mimetype)
 
