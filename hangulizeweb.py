@@ -39,13 +39,16 @@ def get_locale():
     arguments, the cookie values, and the HTTP ``Accept-Language`` header.
     """
     try:
-        return request.args["locale"]
+        locale = request.args["locale"]
     except KeyError:
-        pass
-    try:
-        return request.cookies["locale"]
-    except KeyError:
-        return request.accept_languages.best_match(LOCALES)
+        try:
+            locale = request.cookies["locale"]
+        except KeyError:
+            locale = request.accept_languages.best_match(LOCALES)
+    if locale in LOCALES:
+        return locale
+    else:
+        return app.config['BABEL_DEFAULT_LOCALE']
 
 
 @app.route("/locale", methods=["post"])
