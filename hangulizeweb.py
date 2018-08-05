@@ -13,12 +13,9 @@ import random
 import urllib
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
-from flaskext.babel import Babel, gettext
+from flaskext.babel import Babel
 from google.appengine.api import urlfetch
 from pytz import timezone, utc
-
-from hangulize import get_lang
-from hangulize.models import Language
 
 
 __all__ = ['app']
