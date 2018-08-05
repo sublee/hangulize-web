@@ -86,13 +86,12 @@ def get_langs():
 
 def get_example(lang=None):
     lang = lang or random.choice(list(get_langs()))[0]
-    modname = lang.replace('.', '_')
-    test = getattr(__import__('tests.%s' % modname), modname)
-    case = [x for x in dir(test)
-            if x.endswith('TestCase') and not x.startswith('Hangulize')][0]
-    test = getattr(test, case)
-    word = random.choice(test.get_examples().keys())
-    return lang, word
+
+    specs = fetch_specs()
+    spec = specs[lang]
+    example = random.choice(spec['test'])
+
+    return lang, example['word']
 
 
 def best_mimetype(html=True, json=True, plist=True):
