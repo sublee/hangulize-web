@@ -144,7 +144,7 @@ def hangulize(word, lang):
     r = urlfetch.fetch(api + '/hangulized/%s/%s' % (s_lang, s_word),
                        headers={'Accept': 'text/plain'})
 
-    return r.content
+    return r.content.decode('utf-8')
 
 
 def get_result(lang, word):
