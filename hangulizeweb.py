@@ -8,6 +8,7 @@
 """
 from __future__ import with_statement
 from datetime import datetime
+import json
 import random
 import urllib
 
@@ -59,12 +60,25 @@ def set_locale():
     return response
 
 
+specs = {}
+
+
+def fetch_specs():
+    if specs:
+        return specs
+
+    r = urlfetch.fetch(api + '/specs', headers={'Accept': 'application/json'})
+    specs.update({s['lang']['id']: s for s in json.loads(r.content)['specs']})
+    return specs
+
+
 def get_langs():
     """Returns the allowed languages in :mod:`hangulize`."""
-    import hangulize.langs
     def iter():
-        for code in hangulize.langs.get_list():
-            yield code, gettext(code)
+        for lang, spec in fetch_specs().items():
+            attr = {'ko': 'korean', 'en': 'english'}[get_locale()]
+            name = spec['lang'][attr]
+            yield lang, name
     def compare(x, y):
         return cmp(x[1], y[1])
     return sorted(iter(), cmp=compare)
