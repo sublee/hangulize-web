@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=500, user-scalable=yes" />
 <meta property="og:image"
-  content="{{ url_for('static', filename='logo.png') }}"/> 
+  content="{{ url_for('static', filename='logo.png') }}"/>
 <meta property="fb:admins" content="1081697408" />
 <meta name="keyword" content="Hangulize, 외래어, 한글, 표기, 변환기,
   Korean, Hangul, Transcription" />
@@ -23,7 +24,7 @@
 {% block import %}
   <link rel="stylesheet" type="text/css"
     href="{{ url_for('static', filename='style.css') }}" />
-  <script src="//code.jquery.com/jquery-1.4.4.min.js"></script> 
+  <script src="//code.jquery.com/jquery-1.4.4.min.js"></script>
 {% endblock %}
 </head>
 <body class="{% block class %}{% endblock %}">
