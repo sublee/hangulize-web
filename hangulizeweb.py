@@ -10,6 +10,7 @@ from __future__ import with_statement
 
 from datetime import datetime
 import json
+import os
 import random
 import time
 import urllib
@@ -32,7 +33,7 @@ app.config['BABEL_DEFAULT_LOCALE'] = 'ko'
 babel = Babel(app)
 
 
-api = 'https://api.hangulize.org/v2'
+api = os.getenv('HANGULIZE_API', 'https://api.hangulize.org/v2')
 
 
 @babel.localeselector
