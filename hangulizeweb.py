@@ -7,9 +7,11 @@
 
 """
 from __future__ import with_statement
+
 from datetime import datetime
 import json
 import random
+import time
 import urllib
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
@@ -61,15 +63,25 @@ def set_locale():
 
 
 specs = {}
+specs_fetched_at = float('-inf')
+SPECS_TTL = 600  # 10 min
 
 
 def fetch_specs():
     """Fetches and caches the specs from the v2 API."""
-    if specs:
+    global specs_fetched_at
+
+    t = time.time()
+
+    if specs and t - specs_fetched_at < SPECS_TTL:
         return specs
 
     r = urlfetch.fetch(api + '/specs', headers={'Accept': 'application/json'})
+
+    specs.clear()
     specs.update({s['lang']['id']: s for s in json.loads(r.content)['specs']})
+    specs_fetched_at = t
+
     return specs
 
 
