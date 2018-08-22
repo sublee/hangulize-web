@@ -4,13 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=500, user-scalable=yes" />
 <meta property="og:image"
-  content="{{ url_for('static', filename='logo.png') }}"/>
+  content="{{ url_for('static', filename='logo-en.png') }}"/>
 <meta property="fb:admins" content="1081697408" />
 <meta name="keyword" content="Hangulize, 외래어, 한글, 표기, 변환기,
   Korean, Hangul, Transcription" />
 <meta name="google-site-verification"
   content="fZQsdvG-debohtE8S_xAS9kcpyvy81hhMjGllvS4WSY" />
-<title>{% block title -%} Hangulize {%- endblock %}</title>
+<title>
+  {%- block title -%}
+    {% if locale == 'ko' %}
+      한글라이즈
+    {% else %}
+      Hangulize
+    {% endif %}
+  {%- endblock %}
+</title>
 
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
 </script>
@@ -29,10 +37,13 @@
 </head>
 <body class="{% block class %}{% endblock %}">
   <div class="logo">
-    {% block logo %}
-      <img src="{{ url_for('static', filename='logo-mini.png') }}"
+    {% if locale == 'ko' %}
+      <img src="{{ url_for('static', filename='logo-ko.png') }}"
+        alt="한글라이즈" />
+    {% else %}
+      <img src="{{ url_for('static', filename='logo-en.png') }}"
         alt="Hangulize" />
-    {% endblock %}
+    {% endif %}
   </div>
   {% block body %}{% endblock %}
   <!-- Set Locale -->
@@ -91,4 +102,3 @@
   </script>
 </body>
 </html>
-
