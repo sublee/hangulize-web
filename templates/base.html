@@ -78,27 +78,16 @@
   {% block foot %}
     <script class="shuffle" src="{{ url_for('shuffle') }}"></script>
   {% endblock %}
-  <!-- Google Analytics -->
-  <script>
-    var _gaq = _gaq || [];
-    _gaq.push([ "_setAccount", "UA-19439120-1" ]);
-    _gaq.push([ "_trackPageview" ]);
 
-    (function() {
-      var ga = document.createElement( "script" );
-      ga.type = "text/javascript";
-      ga.async = true;
-      var src;
-      if ( "https:" === document.location.protocol ) {
-        src = "https://ssl";
-      } else {
-        src = "http://www";
-      }
-      src += ".google-analytics.com/ga.js";
-      ga.src = src;
-      var s = document.getElementsByTagName( "script" )[ 0 ];
-      s.parentNode.insertBefore( ga, s );
-    })();
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19439120-1">
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-19439120-1');
   </script>
 </body>
 </html>
