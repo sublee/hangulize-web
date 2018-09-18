@@ -30,8 +30,17 @@ var FOLD = true,
             return;
         }
         hangulize.timer = setTimeout(function() {
+            var lang = $( "[name=lang]" );
+            var reqLang = lang.val();
             var reqWord = word.val();
+
             word.addClass( "loading" );
+
+            gtag('event', reqLang, {
+                'event_category': 'Hangulize',
+                'event_label': reqWord
+            });
+
             $.get( "", form.serialize(), function( data ) {
                 if ( data.success && reqWord === hangulize.prevWord ) {
                     result.text( data.result );
@@ -39,11 +48,10 @@ var FOLD = true,
                     hangulize.mode = EXPAND;
                     word.removeClass( "loading" );
                     if ( history.replaceState ) {
-                        var lang = $( "[name=lang]" ),
-                            enc = encodeURIComponent,
+                        var enc = encodeURIComponent,
                             qs = "?";
-                        qs += "lang=" + enc( lang.val() );
-                        qs += "&word=" + enc( word.val() );
+                        qs += "lang=" + enc( reqLang );
+                        qs += "&word=" + enc( reqWord );
                         history.replaceState( null, "", qs );
                     }
                 }
