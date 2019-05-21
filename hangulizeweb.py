@@ -125,7 +125,11 @@ def best_mimetype(html=True, json=True, plist=True):
         mimetypes.append('application/plist+xml')
     if html:
         mimetypes.append('text/html')
-    return request.accept_mimetypes.best_match(mimetypes) or ''
+    try:
+        return request.accept_mimetypes.best_match(mimetypes) or ''
+    except ValueError:
+        # e.g., ValueError: invalid mimetype 'v=b3'
+        return ''
 
 
 def dump(data, mimetype=None):
