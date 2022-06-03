@@ -247,3 +247,8 @@ def shuffle():
 def favicon():
     """Sends the favicon file."""
     return app.send_static_file('favicon.ico')
+
+
+@app.route('/_ah/warmup')
+def warmup():
+    return '', 200
