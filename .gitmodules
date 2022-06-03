@@ -1,21 +1,18 @@
-[submodule "lib/hangulize"]
-	path = lib/hangulize
-    url = git://github.com/sublee/hangulize.git
 [submodule "lib/jinja2"]
 	path = lib/jinja2
-	url = git://github.com/mitsuhiko/jinja2.git
+	url = https://github.com/pallets/jinja
 [submodule "lib/werkzeug"]
 	path = lib/werkzeug
-	url = git://github.com/mitsuhiko/werkzeug.git
+	url = https://github.com/pallets/werkzeug
 [submodule "lib/flask"]
 	path = lib/flask
-	url = git://github.com/mitsuhiko/flask.git
-[submodule "lib/flask-bebel"]
-	path = lib/flask-bebel
-	url = git://github.com/mitsuhiko/flask-babel.git
+	url = https://github.com/pallets/flask
+[submodule "lib/flask-babel"]
+	path = lib/flask-babel
+	url = https://github.com/python-babel/flask-babel
 [submodule "lib/markdown"]
 	path = lib/markdown
 	url = https://gitorious.org/python-markdown/mainline.git
 [submodule "lib/requests"]
 	path = lib/requests
-	url = https://github.com/requests/requests.git
+	url = https://github.com/requests/requests
